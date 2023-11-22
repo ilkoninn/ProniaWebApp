@@ -1,0 +1,28 @@
+﻿@model Slider
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Create Slider</h1>
+    <form method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label">Slider Title</label>
+            <input asp-for="Title" type="text" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SubTitle" class="form-label">Slider Sub Title</label>
+            <input asp-for="SubTitle" type="text" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ImgUrl" class="form-label">Slider Image</label>
+            <input asp-for="ImgUrl" type="file" class="form-control">
+        </div>
+        <div class="col-12 mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>
+<!-- /.container-fluid -->

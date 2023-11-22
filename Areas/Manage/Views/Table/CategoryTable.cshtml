@@ -1,0 +1,57 @@
+﻿@model AdminVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Category Table</h1>
+        <a asp-controller="CRUDCategory" asp-action="CreateCategory" class="btn btn-primary">Create</a>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 mt-5">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No:</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No:</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model.categories)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <a asp-controller="CRUDCategory" asp-action="UpdateCategory" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
+                                    <a asp-controller="CRUDCategory" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

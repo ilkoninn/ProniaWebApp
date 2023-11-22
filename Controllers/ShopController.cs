@@ -17,7 +17,9 @@ namespace ProniaWebApp.Controllers
                 .Include(x => x.ProductImage)
                 .ToList();
             vm.tags = _db.Tags.ToList();
-            vm.categories = _db.Categories.ToList();    
+            vm.categories = _db.Categories
+                .Include(x => x.Product)
+                .ToList();    
             return View(vm);
         }
 

@@ -14,10 +14,16 @@ namespace ProniaWebApp
 
 
             var app = builder.Build();
+
+            app.MapControllerRoute(
+                name: "AdminPanel",
+                pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{Id?}"
+                );
             app.MapControllerRoute(
                 name: "Home",
                 pattern: "{controller=Home}/{action=Index}/{Id?}"
                 );
+
             app.UseStaticFiles();
 
             app.Run();

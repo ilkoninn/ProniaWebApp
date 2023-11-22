@@ -1,0 +1,63 @@
+﻿@model AdminVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Blog Images Table</h1>
+        <a asp-controller="" asp-action="" asp-route-id="" class="btn btn-primary">Create</a>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 mt-5">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No:</th>
+                            <th>Id</th>
+                            <th>Image Url</th>
+                            <th>Blog Title</th>
+                            <th>BlogId</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No:</th>
+                            <th>Id</th>
+                            <th>Image Url</th>
+                            <th>Blog Title</th>
+                            <th>BlogId</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model.blogImages)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.Id</td>
+                                <td>@item.ImgUrl</td>
+                                <td>@item.Blog.Title</td>
+                                <td>@item.Blog.Id</td>
+                                <td>
+                                    <a asp-controller="" asp-action="" asp-route-id="" class="btn btn-secondary">Update</a>
+                                    <a asp-controller="" asp-action="" asp-route-id="" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
