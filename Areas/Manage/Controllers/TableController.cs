@@ -62,17 +62,5 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 .ToList();
             return View(adminVM);
         }
-        public IActionResult ProductTagTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.productTags = _db.ProductTags.ToList();
-            return View(adminVM);   
-        }
-        public IActionResult BlogTagTable() 
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.blogTags = _db.BlogsTags.ToList();
-            return View(adminVM);
-        }
     }
 }

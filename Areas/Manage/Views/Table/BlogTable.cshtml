@@ -21,6 +21,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Created Date</th>
+                            <th>Category Name</th>
                             <th>CategoryId</th>
                             <th>Change Section</th>
                         </tr>
@@ -32,6 +33,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Created Date</th>
+                            <th>Category Name</th>
                             <th>CategoryId</th>
                             <th>Change Section</th
                         </tr>
@@ -50,6 +52,7 @@
                                 <td>@item.Description</td>
                                 <td>@item.CreatedDate</td>
                                 <td>@item.Category.Name</td>
+                                <td>@item.Category.Id</td>
                                 <td>
                                     <a asp-controller="" asp-action="" asp-route-id="" class="btn btn-secondary">Update</a>
                                     <a asp-controller="" asp-action="" asp-route-id="" class="btn btn-danger">Delete</a>
