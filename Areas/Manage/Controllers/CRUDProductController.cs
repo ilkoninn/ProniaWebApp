@@ -19,7 +19,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public IActionResult CreateProduct(Product Product)
         {
             _db.Products.Add(Product);
-            _db.SaveChanges();
+            _db.SaveChangesAsync();
             return RedirectToAction("ProductTable", "Table");
         }
         public IActionResult UpdateProduct(int Id)
@@ -31,14 +31,14 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public IActionResult UpdateProduct(Product Product)
         {
             Product oldProduct = _db.Products.Find(Product.Id);
-            _db.SaveChanges();
+            _db.SaveChangesAsync();
             return RedirectToAction("ProductTable", "Table");
         }
         public IActionResult DeleteProduct(int Id)
         {
             Product Product = _db.Products.Find(Id);
             _db.Products.Remove(Product);
-            _db.SaveChanges();
+            _db.SaveChangesAsync();
             return RedirectToAction("ProductTable", "Table");
         }
     }

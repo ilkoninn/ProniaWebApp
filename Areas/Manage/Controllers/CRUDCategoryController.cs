@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -17,21 +16,36 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult CreateCategory(Category category)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             _db.Categories.Add(category);
             _db.SaveChanges();
+
             return RedirectToAction("CategoryTable", "Table");
         }
         public IActionResult UpdateCategory(int Id)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             Category category = _db.Categories.Find(Id);
+
             return View(category);
         }
         [HttpPost]
-        public IActionResult UpdateCategory(Category category)
+        public IActionResult UpdateCategory(Category newCategory)
         {
-            Category oldCategory = _db.Categories.Find(category.Id);
-            oldCategory.Name = category.Name;
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            Category oldCategory = _db.Categories.Find(newCategory.Id);
+            oldCategory.Name = newCategory.Name;
             _db.SaveChanges();
+
             return RedirectToAction("CategoryTable", "Table");
         }
         public IActionResult DeleteCategory(int Id)
@@ -39,6 +53,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             Category category = _db.Categories.Find(Id);
             _db.Categories.Remove(category);
             _db.SaveChanges();
+
             return RedirectToAction("CategoryTable", "Table");
         }
     }

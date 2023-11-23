@@ -17,9 +17,9 @@
                     <thead>
                         <tr>
                             <th>No:</th>
-                            <th>Id</th>
                             <th>Title</th>
                             <th>Sub Title</th>
+                            <th>Description</th>
                             <th>Image Url</th>
                             <th>Change Section</th>
                         </tr>
@@ -27,9 +27,9 @@
                     <tfoot>
                         <tr>
                             <th>No:</th>
-                            <th>Id</th>
                             <th>Title</th>
                             <th>Sub Title</th>
+                            <th>Description</th>
                             <th>Image Url</th>
                             <th>Change Section</th>
                         </tr>
@@ -43,10 +43,14 @@
                             count++;
                             <tr>
                                 <td>@count</td>
-                                <td>@item.Id</td>
                                 <td>@item.Title</td>
                                 <td>@item.SubTitle</td>
-                                <td>@item.ImgUrl</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <div style="width:100px">
+                                        <img width="100%" src="~/Upload/SliderImages/@item.ImgUrl">
+                                    </div>
+                                </td>
                                 <td>
                                     <a asp-controller="CRUDSlider" asp-action="UpdateSlider" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
                                     <a asp-controller="CRUDSlider" asp-action="DeleteSlider" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

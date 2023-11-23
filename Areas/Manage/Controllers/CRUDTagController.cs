@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -17,21 +16,36 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult CreateTag(Tag Tag)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             _db.Tags.Add(Tag);
             _db.SaveChanges();
+
             return RedirectToAction("TagTable", "Table");
         }
         public IActionResult UpdateTag(int Id)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             Tag Tag = _db.Tags.Find(Id);
+
             return View(Tag);
         }
         [HttpPost]
-        public IActionResult UpdateTag(Tag Tag)
+        public IActionResult UpdateTag(Tag newTag)
         {
-            Tag oldTag = _db.Tags.Find(Tag.Id);
-            oldTag.Name = Tag.Name;
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            Tag oldTag = _db.Tags.Find(newTag.Id);
+            oldTag.Name = newTag.Name;
             _db.SaveChanges();
+
             return RedirectToAction("TagTable", "Table");
         }
         public IActionResult DeleteTag(int Id)
@@ -39,6 +53,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             Tag Tag = _db.Tags.Find(Id);
             _db.Tags.Remove(Tag);
             _db.SaveChanges();
+
             return RedirectToAction("TagTable", "Table");
         }
     }

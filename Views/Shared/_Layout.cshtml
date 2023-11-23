@@ -100,7 +100,7 @@
                                     <a href="tel://+00-123-456-789">+00 123 456 789</a>
                                 </div>
 
-                                <a href="index.html" class="header-logo">
+                                <a asp-controller="Home" asp-action="Index" class="header-logo">
                                     <img src="~/assets/images/logo/dark.png" alt="Header Logo" />
                                 </a>
 
@@ -168,106 +168,100 @@
                                             <a asp-controller="Home" asp-action="Index">Home</a>
                                         </li>
                                         <li class="megamenu-holder">
-                                            <a href="shop.html">Shop</a>
-                                            <ul class="drop-menu megamenu">
-                                                <li>
-                                                    <span class="title">Shop Layout</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html">Shop Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Style</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="single-product-variable.html">Single Product Variable</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-group.html">Single Product Group</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product.html">Single Product Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-affiliate.html">Single Product Affiliate</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sale.html">Single Product Sale</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Related</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="my-account.html">My Account</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="login-register.html">Login | Register</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html">Shopping Cart</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="compare.html">Compare</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">Checkout</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                            <a asp-controller="Shop" asp-action="ShopList">Shop</a>
+                                            @* <ul class="drop-menu megamenu">
+                                            <li>
+                                            <span class="title">Shop Layout</span>
+                                            <ul>
+                                            <li>
+                                            <a asp-controller="Shop" asp-action="ShopList">Shop Default</a>
+                                            </li>
+                                            <li>
+                                            <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
+                                            </li>
+                                            <li>
+                                            <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
+                                            </li>
+                                            <li>
+                                            <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
+                                            </li>
                                             </ul>
+                                            </li>
+                                            <li>
+                                            <span class="title">Product Style</span>
+                                            <ul>
+                                            <li>
+                                            <a href="single-product-variable.html">Single Product Variable</a>
+                                            </li>
+                                            <li>
+                                            <a href="single-product-group.html">Single Product Group</a>
+                                            </li>
+                                            <li>
+                                            <a href="single-product.html">Single Product Default</a>
+                                            </li>
+                                            <li>
+                                            <a href="single-product-affiliate.html">Single Product Affiliate</a>
+                                            </li>
+                                            <li>
+                                            <a href="single-product-sale.html">Single Product Sale</a>
+                                            </li>
+                                            <li>
+                                            <a href="single-product-sticky.html">Single Product Sticky</a>
+                                            </li>
+                                            </ul>
+                                            </li>
+                                            <li>
+                                            <span class="title">Product Related</span>
+                                            <ul>
+                                            <li>
+                                            <a href="my-account.html">My Account</a>
+                                            </li>
+                                            <li>
+                                            <a href="login-register.html">Login | Register</a>
+                                            </li>
+                                            <li>
+                                            <a href="cart.html">Shopping Cart</a>
+                                            </li>
+                                            <li>
+                                            <a href="wishlist.html">Wishlist</a>
+                                            </li>
+                                            <li>
+                                            <a href="compare.html">Compare</a>
+                                            </li>
+                                            <li>
+                                            <a href="checkout.html">Checkout</a>
+                                            </li>
+                                            </ul>
+                                            </li>
+                                            </ul> *@
                                         </li>
                                         <li class="drop-holder">
-                                            <a href="blog.html">Blog</a>
-                                            <ul class="drop-menu">
-                                                <li>
-                                                    <a href="blog-listview.html">Blog List View</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-detail.html">Blog Detail</a>
-                                                </li>
-                                            </ul>
+                                            <a asp-controller="Blog" asp-action="BlogList">Blog</a>
+                                            @* <ul class="drop-menu">
+                                            <li>
+                                            <a href="blog-listview.html">Blog List View</a>
+                                            </li>
+                                            <li>
+                                            <a href="blog-detail.html">Blog Detail</a>
+                                            </li>
+                                            </ul> *@
                                         </li>
                                         <li>
-                                            <a href="about.html">About Us</a>
+                                            <a asp-controller="About" asp-action="AboutUs">About Us</a>
                                         </li>
-                                        <li class="drop-holder">
-                                            <a href="#">Pages</a>
-                                            <ul class="drop-menu">
-                                                <li>
-                                                    <a href="faq.html">FAQ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="404.html">Error 404</a>
-                                                </li>
-                                            </ul>
+                                        @* <li class="drop-holder">
+                                        <a href="#">Pages</a>
+                                        <ul class="drop-menu">
+                                        <li>
+                                        <a href="faq.html">FAQ</a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact Us</a>
+                                        <a href="404.html">Error 404</a>
+                                        </li>
+                                        </ul>
+                                        </li>*@
+                                        <li>
+                                            <a asp-controller="Contact" asp-action="ContactUs">Contact Us</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -281,7 +275,7 @@
                     <div class="header-nav position-relative">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-6">
-                                <a href="index.html" class="header-logo">
+                                <a asp-controller="Home" asp-action="Index" class="header-logo">
                                     <img src="~/assets/images/logo/dark.png" alt="Header Logo" />
                                 </a>
                             </div>
@@ -293,106 +287,100 @@
                                                 <a asp-controller="Home" asp-action="Index">Home</a>
                                             </li>
                                             <li class="megamenu-holder">
-                                                <a href="shop.html">Shop</a>
-                                                <ul class="drop-menu megamenu">
-                                                    <li>
-                                                        <span class="title">Shop Layout</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="shop.html">Shop Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Style</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="single-product-variable.html">Single Product Variable</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-group.html">Single Product Group</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product.html">Single Product Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-affiliate.html">Single Product Affiliate</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sale.html">Single Product Sale</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Related</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="my-account.html">My Account</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="login-register.html">Login | Register</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="cart.html">Shopping Cart</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="wishlist.html">Wishlist</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="compare.html">Compare</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="checkout.html">Checkout</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
+                                                <a asp-controller="Shop" asp-action="ShopList">Shop</a>
+                                                @* <ul class="drop-menu megamenu">
+                                                <li>
+                                                <span class="title">Shop Layout</span>
+                                                <ul>
+                                                <li>
+                                                <a asp-controller="Shop" asp-action="ShopList">Shop Default</a>
+                                                </li>
+                                                <li>
+                                                <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
+                                                </li>
+                                                <li>
+                                                <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
+                                                </li>
+                                                <li>
+                                                <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
+                                                </li>
                                                 </ul>
+                                                </li>
+                                                <li>
+                                                <span class="title">Product Style</span>
+                                                <ul>
+                                                <li>
+                                                <a href="single-product-variable.html">Single Product Variable</a>
+                                                </li>
+                                                <li>
+                                                <a href="single-product-group.html">Single Product Group</a>
+                                                </li>
+                                                <li>
+                                                <a href="single-product.html">Single Product Default</a>
+                                                </li>
+                                                <li>
+                                                <a href="single-product-affiliate.html">Single Product Affiliate</a>
+                                                </li>
+                                                <li>
+                                                <a href="single-product-sale.html">Single Product Sale</a>
+                                                </li>
+                                                <li>
+                                                <a href="single-product-sticky.html">Single Product Sticky</a>
+                                                </li>
+                                                </ul>
+                                                </li>
+                                                <li>
+                                                <span class="title">Product Related</span>
+                                                <ul>
+                                                <li>
+                                                <a href="my-account.html">My Account</a>
+                                                </li>
+                                                <li>
+                                                <a href="login-register.html">Login | Register</a>
+                                                </li>
+                                                <li>
+                                                <a href="cart.html">Shopping Cart</a>
+                                                </li>
+                                                <li>
+                                                <a href="wishlist.html">Wishlist</a>
+                                                </li>
+                                                <li>
+                                                <a href="compare.html">Compare</a>
+                                                </li>
+                                                <li>
+                                                <a href="checkout.html">Checkout</a>
+                                                </li>
+                                                </ul>
+                                                </li>
+                                                </ul> *@
                                             </li>
                                             <li class="drop-holder">
-                                                <a href="blog.html">Blog</a>
-                                                <ul class="drop-menu">
-                                                    <li>
-                                                        <a href="blog-listview.html">Blog List View</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-detail.html">Blog Detail</a>
-                                                    </li>
-                                                </ul>
+                                                <a asp-controller="Blog" asp-action="BlogList">Blog</a>
+                                                @* <ul class="drop-menu">
+                                                <li>
+                                                <a href="blog-listview.html">Blog List View</a>
+                                                </li>
+                                                <li>
+                                                <a href="blog-detail.html">Blog Detail</a>
+                                                </li>
+                                                </ul> *@
                                             </li>
                                             <li>
-                                                <a href="about.html">About Us</a>
+                                                <a asp-controller="About" asp-action="AboutUs">About Us</a>
                                             </li>
-                                            <li class="drop-holder">
-                                                <a href="#">Pages</a>
-                                                <ul class="drop-menu">
-                                                    <li>
-                                                        <a href="faq.html">FAQ</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="404.html">Error 404</a>
-                                                    </li>
-                                                </ul>
+                                            @* <li class="drop-holder">
+                                            <a href="#">Pages</a>
+                                            <ul class="drop-menu">
+                                            <li>
+                                            <a href="faq.html">FAQ</a>
                                             </li>
                                             <li>
-                                                <a href="contact.html">Contact Us</a>
+                                            <a href="404.html">Error 404</a>
+                                            </li>
+                                            </ul>
+                                            </li>*@
+                                            <li>
+                                                <a asp-controller="Contact" asp-action="ContactUs">Contact Us</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -876,7 +864,7 @@
                         <div class="col-lg-3">
                             <div class="footer-widget-item">
                                 <div class="footer-widget-logo">
-                                    <a href="index.html">
+                                    <a asp-controller="Home" asp-action="Index">
                                         <img src="~/assets/images/logo/dark.png" alt="Logo" />
                                     </a>
                                 </div>

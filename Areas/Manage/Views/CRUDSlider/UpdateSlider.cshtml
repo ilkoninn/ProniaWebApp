@@ -9,20 +9,30 @@
 
     <h3 class="h5 mb-4 text-gray-800">Your Slider Title: @Model.Title</h3>
     <h3 class="h5 mb-4 text-gray-800">Your Slider Sub Title: @Model.SubTitle</h3>
+    <h3 class="h5 mb-4 text-gray-800">Your Slider Description: @Model.Description</h3>
     <h3 class="h5 mb-4 text-gray-800">Your Slider Image Url: @Model.ImgUrl</h3>
 
-    <form method="post" class="row g-3">
-        <div class="col-md-6">
-            <label asp-for="Title" class="form-label">Slider Title</label>
-            <input asp-for="Title" type="text" class="form-control">
-        </div>
-        <div class="col-md-6">
-            <label asp-for="SubTitle" class="form-label">Slider Sub Title</label>
-            <input asp-for="SubTitle" type="text" class="form-control">
-        </div>
-        <div class="col-md-6">
-            <label asp-for="ImgUrl" class="form-label">Slider Image</label>
-            <input asp-for="ImgUrl" type="file" class="form-control">
+    <form method="post" enctype="multipart/form-data" class="row g-3">
+        <div class="row">
+            <div class="mb-3 col-md-3">
+                <label asp-for="Title" class="form-label">Title</label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label asp-for="SubTitle" class="form-label">Sub Title</label>
+                <input asp-for="SubTitle" class="form-control">
+                <span asp-validation-for="SubTitle" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label asp-for="ImageFile" class="form-label">Image File</label>
+                <input asp-for="ImageFile" class="form-control">
+                <span asp-validation-for="ImageFile" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+            </div>
         </div>
         <div class="col-12 mt-4">
             <button type="submit" class="btn btn-primary">Submit</button>

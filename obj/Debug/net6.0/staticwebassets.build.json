@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "J9JkzKCvt5Ozqn1XA8hHey9mhDA8LDRAXDlcZt2chFc=",
+  "Hash": "6ZWDs5YIy00A9p95ETVzpQHB3SWtd9/amzCw3R/cj00=",
   "Source": "ProniaWebApp",
   "BasePath": "_content/ProniaWebApp",
   "Mode": "Default",
@@ -35154,6 +35154,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\manage\\vendor\\jquery-easing\\jquery.easing.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\07ee0f32-7ea3-4696-b190-8534c2952d6739f9f94457154faadf3f7c1fa562110e.jpg",
+      "SourceId": "ProniaWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
+      "BasePath": "_content/ProniaWebApp",
+      "RelativePath": "Upload/SliderImages/07ee0f32-7ea3-4696-b190-8534c2952d6739f9f94457154faadf3f7c1fa562110e.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\SliderImages\\07ee0f32-7ea3-4696-b190-8534c2952d6739f9f94457154faadf3f7c1fa562110e.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\7a880622-8214-4865-84e1-94853b4090a1f6bb05c5-a071-46a0-a7a7-f53deb61f770.jpg",
+      "SourceId": "ProniaWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
+      "BasePath": "_content/ProniaWebApp",
+      "RelativePath": "Upload/SliderImages/7a880622-8214-4865-84e1-94853b4090a1f6bb05c5-a071-46a0-a7a7-f53deb61f770.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\SliderImages\\7a880622-8214-4865-84e1-94853b4090a1f6bb05c5-a071-46a0-a7a7-f53deb61f770.jpg"
     }
   ]
 }

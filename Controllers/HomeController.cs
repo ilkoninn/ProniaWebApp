@@ -11,16 +11,9 @@ namespace ProniaWebApp.Controllers
         }
         public IActionResult Index()
         {
-            HomeVM homeVM = new HomeVM();
-            homeVM.sliders = _context.Sliders.ToList();
-            homeVM.products = _context.Products
-                .Include(x => x.ProductImage)
-                .ToList();
-            homeVM.blogs = _context.Blogs
-                .Include(x => x.BlogImage)
-                .ToList();
-
-            return View(homeVM);
+            HomeVM vm = new HomeVM(); 
+            vm.sliders = _context.Sliders.ToList();
+            return View(vm);
         }
     }
 }

@@ -10,56 +10,60 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             _db = appDb;
         }
-        public IActionResult CategoryTable()
+        public async Task<IActionResult> CategoryTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.categories = _db.Categories.ToList();
+            adminVM.categories = await _db.Categories.ToListAsync();
             return View(adminVM);
         }
-        public IActionResult TagTable()
+        public async Task<IActionResult> TagTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.tags = _db.Tags.ToList();
+            adminVM.tags = await _db.Tags.ToListAsync();
             
             return View(adminVM);
         }
-        public IActionResult ProductTable()
+        public async Task<IActionResult> ProductTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.products = _db.Products
+            adminVM.products = await _db.Products
                 .Include(x => x.Category)
-                .ToList();
+                .ToListAsync();
             
             return View(adminVM);
         }
-        public IActionResult BlogTable()
+        public async Task<IActionResult> BlogTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.blogs = _db.Blogs
+            adminVM.blogs = await _db.Blogs
                 .Include(x => x.Category)
-                .ToList();
+                .ToListAsync();
+
             return View(adminVM);
         }
-        public IActionResult SliderTable()
+        public async Task<IActionResult> SliderTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.slider = _db.Sliders.ToList();
+            adminVM.slider = await _db.Sliders.ToListAsync();
+
             return View(adminVM);
         }
-        public IActionResult BlogImagesTable()
+        public async Task<IActionResult> BlogImagesTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.blogImages = _db.BlogsImages
+            adminVM.blogImages = await _db.BlogsImages
                 .Include(x => x.Blog)
-                .ToList();
+                .ToListAsync();
+
             return View(adminVM);
         }
-        public IActionResult ProductImagesTable()
+        public async Task<IActionResult> ProductImagesTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.productImages = _db.ProductImages
+            adminVM.productImages = await _db.ProductImages
                 .Include(x => x.Product)
-                .ToList();
+                .ToListAsync();
+
             return View(adminVM);
         }
     }

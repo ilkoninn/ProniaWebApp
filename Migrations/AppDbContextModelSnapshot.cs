@@ -22,6 +22,36 @@ namespace ProniaWebApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("BlogTag", b =>
+                {
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlogId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BlogTag");
+                });
+
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProductTag");
+                });
+
             modelBuilder.Entity("ProniaWebApp.Models.Blog", b =>
                 {
                     b.Property<int>("Id")
@@ -202,6 +232,10 @@ namespace ProniaWebApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,6 +270,36 @@ namespace ProniaWebApp.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("BlogTag", b =>
+                {
+                    b.HasOne("ProniaWebApp.Models.Blog", null)
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaWebApp.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.HasOne("ProniaWebApp.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaWebApp.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProniaWebApp.Models.Blog", b =>
                 {
                     b.HasOne("ProniaWebApp.Models.Category", "Category")
@@ -261,13 +325,13 @@ namespace ProniaWebApp.Migrations
             modelBuilder.Entity("ProniaWebApp.Models.BlogTag", b =>
                 {
                     b.HasOne("ProniaWebApp.Models.Blog", "Blog")
-                        .WithMany("BlogTags")
+                        .WithMany()
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProniaWebApp.Models.Tag", "Tag")
-                        .WithMany("BlogTags")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -302,13 +366,13 @@ namespace ProniaWebApp.Migrations
             modelBuilder.Entity("ProniaWebApp.Models.ProductTag", b =>
                 {
                     b.HasOne("ProniaWebApp.Models.Product", "Product")
-                        .WithMany("ProductTags")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProniaWebApp.Models.Tag", "Tag")
-                        .WithMany("ProductTags")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,8 +385,6 @@ namespace ProniaWebApp.Migrations
             modelBuilder.Entity("ProniaWebApp.Models.Blog", b =>
                 {
                     b.Navigation("BlogImage");
-
-                    b.Navigation("BlogTags");
                 });
 
             modelBuilder.Entity("ProniaWebApp.Models.Category", b =>
@@ -335,15 +397,6 @@ namespace ProniaWebApp.Migrations
             modelBuilder.Entity("ProniaWebApp.Models.Product", b =>
                 {
                     b.Navigation("ProductImage");
-
-                    b.Navigation("ProductTags");
-                });
-
-            modelBuilder.Entity("ProniaWebApp.Models.Tag", b =>
-                {
-                    b.Navigation("BlogTags");
-
-                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }

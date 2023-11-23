@@ -11,38 +11,13 @@ namespace ProniaWebApp.Controllers
             _db = context;
         }
         public IActionResult ShopList()
-        {
-            ShopVM vm = new ShopVM();
-            vm.products = _db.Products
-                .Include(x => x.ProductImage)
-                .ToList();
-            vm.tags = _db.Tags.ToList();
-            vm.categories = _db.Categories
-                .Include(x => x.Product)
-                .ToList();    
-            return View(vm);
+        {   
+            return View();
         }
 
         public IActionResult SingleProduct(int id)
-        {
-            ShopVM vm = new ShopVM();
-            
-            if(id == null) return BadRequest();
-            
-            Product product = _db.Products
-                .Include(x => x.ProductImage)
-                .Include(x => x.Category)
-                .Include(x => x.ProductTags)
-                .ThenInclude(x => x.Tag)
-                .FirstOrDefault(x => x.Id == id);
-
-            if(product == null) return NotFound();
-
-            ViewData["Pros"] = _db.Products
-                .Include (x => x.ProductImage)  
-                .ToList();
-            
-            return View(product);
+        {   
+            return View();
         }
     }
 }

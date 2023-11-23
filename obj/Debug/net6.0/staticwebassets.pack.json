@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\07ee0f32-7ea3-4696-b190-8534c2952d6739f9f94457154faadf3f7c1fa562110e.jpg",
+      "PackagePath": "staticwebassets\\Upload\\SliderImages\\07ee0f32-7ea3-4696-b190-8534c2952d6739f9f94457154faadf3f7c1fa562110e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\7a880622-8214-4865-84e1-94853b4090a1f6bb05c5-a071-46a0-a7a7-f53deb61f770.jpg",
+      "PackagePath": "staticwebassets\\Upload\\SliderImages\\7a880622-8214-4865-84e1-94853b4090a1f6bb05c5-a071-46a0-a7a7-f53deb61f770.jpg"
+    },
+    {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\css\\Pe-icon-7-stroke.css",
       "PackagePath": "staticwebassets\\assets\\css\\Pe-icon-7-stroke.css"
     },
