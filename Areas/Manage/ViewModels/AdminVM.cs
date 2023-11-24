@@ -2,14 +2,12 @@
 {
     public class AdminVM
     {
-        public List<Category> categories  { get; set; }
-        public List<Tag> tags { get; set; }
-        public List<Product> products { get; set; }
-        public List<Blog> blogs { get; set; }
-        public List<Slider> slider { get; set; }
-        public List<BlogImage> blogImages { get; set; }
-        public List<ProductImage> productImages { get; set; }
-        public List<BlogTag> blogTags { get; set; }
-        public List<ProductTag> productTags { get; set; }
+        public ICollection<Category> categories { get; set; }
+        public ICollection<Tag> tags { get; set; }
+        public ICollection<Product> products { get; set; }
+        public ICollection<Blog> blogs { get; set; }
+        public ICollection<Slider> sliders { get; set; }
+        public ICollection<BlogImage> blogImages { get; set; }
+        public ICollection<ProductImage> productImages { get; set; }
     }
 }

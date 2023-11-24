@@ -10,12 +10,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             _db = appDb;
         }
-        public async Task<IActionResult> CategoryTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.categories = await _db.Categories.ToListAsync();
-            return View(adminVM);
-        }
+       
         public async Task<IActionResult> TagTable()
         {
             AdminVM adminVM = new AdminVM();
@@ -44,7 +39,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> SliderTable()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.slider = await _db.Sliders.ToListAsync();
+            adminVM.sliders = await _db.Sliders.ToListAsync();
 
             return View(adminVM);
         }

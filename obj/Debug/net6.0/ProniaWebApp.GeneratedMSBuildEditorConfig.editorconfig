@@ -20,36 +20,40 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEFkbWluSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDCategory/CreateCategory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURDYXRlZ29yeVxDcmVhdGVDYXRlZ29yeS5jc2h0bWw=
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Category/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDCategory/UpdateCategory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURDYXRlZ29yeVxVcGRhdGVDYXRlZ29yeS5jc2h0bWw=
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Category/Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XFRhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDProduct/CreateProduct.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURQcm9kdWN0XENyZWF0ZVByb2R1Y3QuY3NodG1s
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Category/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDSlider/CreateSlider.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURTbGlkZXJcQ3JlYXRlU2xpZGVyLmNzaHRtbA==
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Product/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDSlider/UpdateSlider.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURTbGlkZXJcVXBkYXRlU2xpZGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDTag/CreateTag.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURUYWdcQ3JlYXRlVGFnLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/CRUDTag/UpdateTag.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENSVURUYWdcVXBkYXRlVGFnLmNzaHRtbA==
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Product/Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RcVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Slider/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Slider/Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxUYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Slider/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Table/BlogImagesTable.cshtml]
@@ -60,10 +64,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXEJsb2dUYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Table/CategoryTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXENhdGVnb3J5VGFibGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Table/ProductImagesTable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXFByb2R1Y3RJbWFnZXNUYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -72,12 +72,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXFByb2R1Y3RUYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Table/SliderTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXFNsaWRlclRhYmxlLmNzaHRtbA==
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Tag/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Table/TagTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhYmxlXFRhZ1RhYmxlLmNzaHRtbA==
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Tag/Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xUYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/Tag/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/99470/Desktop/ProniaWebApp/Areas/Manage/Views/_ViewImports.cshtml]

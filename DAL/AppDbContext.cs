@@ -13,12 +13,10 @@ namespace ProniaWebApp.DAL
         //Blogs section
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogImage> BlogsImages { get; set; }
-        public DbSet<BlogTag> BlogsTags { get; set; }
 
         //Products section
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductTag> ProductTags { get; set; }
         
     }
 }

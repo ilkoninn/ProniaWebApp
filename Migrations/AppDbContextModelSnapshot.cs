@@ -103,29 +103,6 @@ namespace ProniaWebApp.Migrations
                     b.ToTable("BlogsImages");
                 });
 
-            modelBuilder.Entity("ProniaWebApp.Models.BlogTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("BlogsTags");
-                });
-
             modelBuilder.Entity("ProniaWebApp.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -201,29 +178,6 @@ namespace ProniaWebApp.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("ProniaWebApp.Models.ProductTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ProductTags");
-                });
-
             modelBuilder.Entity("ProniaWebApp.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -237,7 +191,6 @@ namespace ProniaWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImgUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubTitle")
@@ -322,25 +275,6 @@ namespace ProniaWebApp.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("ProniaWebApp.Models.BlogTag", b =>
-                {
-                    b.HasOne("ProniaWebApp.Models.Blog", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaWebApp.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("ProniaWebApp.Models.Product", b =>
                 {
                     b.HasOne("ProniaWebApp.Models.Category", "Category")
@@ -361,25 +295,6 @@ namespace ProniaWebApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProniaWebApp.Models.ProductTag", b =>
-                {
-                    b.HasOne("ProniaWebApp.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaWebApp.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("ProniaWebApp.Models.Blog", b =>

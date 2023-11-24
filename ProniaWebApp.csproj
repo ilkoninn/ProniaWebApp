@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\manage\" />
-    <Folder Include="wwwroot\Upload\SliderImages\" />
   </ItemGroup>
 
 </Project>
