@@ -1,6 +1,4 @@
 ﻿
-using ProniaWebApp.Models;
-
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -29,20 +27,23 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Tag Tag)
+        public async Task<IActionResult> Create(TagVM tagVM)
         {
-            if (await _db.Tags.FirstOrDefaultAsync(x => x.Name == Tag.Name) != null)
+            if (await _db.Tags.FirstOrDefaultAsync(x => x.Name == tagVM.Name) != null)
             {
-                ModelState.AddModelError("Name", "There is a same name category in Table!");
-                return View(Tag);
-            }
-            
-            if (!ModelState.IsValid)
-            {
-                return View(Tag);
+                ModelState.AddModelError("Name", "There is a same name Tag in Table!");
+                return View(tagVM);
             }
 
-            _db.Tags.Add(Tag);
+            if (!ModelState.IsValid)
+            {
+                return View(tagVM);
+            }
+
+            Tag newTag = new Tag();
+            newTag.Name = tagVM.Name;
+
+            _db.Tags.Add(newTag);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");
@@ -57,18 +58,22 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View();
             }
 
-            Tag Tag = await _db.Tags.FindAsync(Id);
+            Tag oldTag = await _db.Tags.FindAsync(Id);
+            TagVM tagVM = new TagVM
+            {
+                Name = oldTag.Name
+            };
 
-            return View(Tag);
+            return View(tagVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(Tag newTag)
+        public async Task<IActionResult> Update(TagVM tagVM)
         {
-            if (await _db.Tags.FirstOrDefaultAsync(x => x.Name == newTag.Name) != null)
+            if (await _db.Tags.FirstOrDefaultAsync(x => x.Name == tagVM.Name) != null)
             {
-                ModelState.AddModelError("Name", "There is a same name category in Table!");
-                return View(newTag);
+                ModelState.AddModelError("Name", "There is a same name Tag in Table!");
+                return View(tagVM);
             }
 
             if (!ModelState.IsValid)
@@ -76,8 +81,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View();
             }
 
-            Tag oldTag = await _db.Tags.FindAsync(newTag.Id);
-            oldTag.Name = newTag.Name;
+            Tag oldTag = await _db.Tags.FindAsync(tagVM.Id);
+            oldTag.Name = tagVM.Name;
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");
@@ -86,8 +91,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Tag Tag = await _db.Tags.FindAsync(Id);
-            _db.Tags.Remove(Tag);
+            Tag tag = await _db.Tags.FindAsync(Id);
+            _db.Tags.Remove(tag);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

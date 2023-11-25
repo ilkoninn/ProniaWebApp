@@ -1,4 +1,4 @@
-﻿@model Category
+﻿@model CategoryVM
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -15,6 +15,7 @@
         </div>
         <div class="col-12 mt-3">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button asp-controller="Category" asp-action="Table" type="submit" class="btn btn-secondary">Cancel</button>
         </div>
     </form>
 

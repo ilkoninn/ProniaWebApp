@@ -27,20 +27,23 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Category Category)
+        public async Task<IActionResult> Create(CategoryVM categoryVM)
         {
-            if(await _db.Categories.FirstOrDefaultAsync(x => x.Name == Category.Name) != null)
+            if(await _db.Categories.FirstOrDefaultAsync(x => x.Name == categoryVM.Name) != null)
             {
                 ModelState.AddModelError("Name", "There is a same name category in Table!");
-                return View(Category);
+                return View(categoryVM);
             }
             
             if (!ModelState.IsValid)
             {
-                return View(Category);
+                return View(categoryVM);
             }
 
-            _db.Categories.Add(Category);
+            Category newCategory = new Category();
+            newCategory.Name = categoryVM.Name;
+
+            _db.Categories.Add(newCategory);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");
@@ -55,26 +58,31 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View();
             }
 
-            Category category = await _db.Categories.FindAsync(Id);
+            Category oldCategory = await _db.Categories.FindAsync(Id);
+            CategoryVM categoryVM = new CategoryVM 
+            {
+                Name = oldCategory.Name
+            };
 
-            return View(category);
+            return View(categoryVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(Category newCategory)
+        public async Task<IActionResult> Update(CategoryVM categoryVM)
         {
-            if (await _db.Categories.FirstOrDefaultAsync(x => x.Name == newCategory.Name) != null)
+            if (await _db.Categories.FirstOrDefaultAsync(x => x.Name == categoryVM.Name) != null)
             {
                 ModelState.AddModelError("Name", "There is a same name category in Table!");
-                return View(newCategory);
+                return View(categoryVM);
             }
 
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            Category oldCategory = await _db.Categories.FindAsync(newCategory.Id);
-            oldCategory.Name = newCategory.Name;
+
+            Category oldCategory = await _db.Categories.FindAsync(categoryVM.Id);
+            oldCategory.Name = categoryVM.Name;
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

@@ -1,0 +1,53 @@
+﻿@model ProductVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Create Product</h1>
+    <form method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label">Product Title</label>
+            <input asp-for="Title" type="text" class="form-control">
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="Title"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Description" class="form-label">Product Description</label>
+            <input asp-for="Description" type="text" class="form-control">
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="Description"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Price" class="form-label">Product Price</label>
+            <input asp-for="Price" type="number" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SKU" class="form-label">Product SKU(Code)</label>
+            <input asp-for="SKU" type="text" class="form-control">
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="SKU"></span>
+            </div>
+        </div>
+        <div class="col-md-6 mt-4">
+            <label asp-for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-select">
+                <option value="null">Choose Category</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="CategoryId"></span>
+            </div>
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>
+<!-- /.container-fluid -->

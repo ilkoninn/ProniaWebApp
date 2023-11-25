@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public Category Category { get; set; }
-        public List<Tag>? Tag { get; set; }
-        public List<BlogImage>? BlogImage { get; set; }
+        public ICollection<Tag>? Tag { get; set; }
+        public ICollection<BlogImage>? BlogImage { get; set; }
     }
 }
