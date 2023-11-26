@@ -17,16 +17,18 @@
                     <thead>
                         <tr>
                             <th>No:</th>
-                            <th>Id</th>
                             <th>Name</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Change Section</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No:</th>
-                            <th>Id</th>
                             <th>Name</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Change Section</th>
                         </tr>
                     </tfoot>
@@ -39,8 +41,17 @@
                             count++;
                             <tr>
                                 <td>@count</td>
-                                <td>@item.Id</td>
                                 <td>@item.Name</td>
+                                <td>
+                                    @item.CreatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                </td>
                                 <td>
                                     <a asp-controller="Tag" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
                                     <a asp-controller="Tag" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

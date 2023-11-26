@@ -20,6 +20,8 @@
                             <th>Image</th>
                             <th>IsPrimary</th>
                             <th>Blog Title</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Change Section</th>
                         </tr>
                     </thead>
@@ -29,6 +31,8 @@
                             <th>Image</th>
                             <th>IsPrimary</th>
                             <th>Blog Title</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Change Section</th>
                         </tr>
                     </tfoot>
@@ -48,6 +52,16 @@
                                 </td>
                                 <th>@item.IsPrime</th>
                                 <td>@Model.products.FirstOrDefault(x => x.Id == item.ProductId).Title</td>
+                                <td>
+                                    @item.CreatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                </td>
                                 <td>
                                     <a asp-controller="ProductImage" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
                                     <a asp-controller="ProductImage" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

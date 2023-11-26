@@ -1,0 +1,74 @@
+﻿@model AdminVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Blog Table</h1>
+        <a asp-controller="Blog" asp-action="Create" class="btn btn-primary">Create</a>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 mt-5">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No:</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
+                            <th>Category Name</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No:</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
+                            <th>Category Name</th>
+                            <th>Change Section</th
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model.blogs)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.Title</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    @item.CreatedDate.ToString("HH:mm")
+                                    <br/>
+                                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    <br/>
+                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
+                                <td>
+                                    <a asp-controller="Blog" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
+                                    <a asp-controller="Blog" asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

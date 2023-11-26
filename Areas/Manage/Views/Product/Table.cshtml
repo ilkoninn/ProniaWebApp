@@ -21,8 +21,9 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>SKU(Code)</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Category Name</th>
-                            <th>Tags Name</th>
                             <th>Change Section</th>
                         </tr>
                     </thead>
@@ -33,8 +34,9 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>SKU(Code)</th>
+                            <th>Created Date</th>
+                            <th>Last Updated Date</th>
                             <th>Category Name</th>
-                            <th>Tags Name</th>
                             <th>Change Section</th>
                         </tr>
                     </tfoot>
@@ -51,7 +53,16 @@
                                 <td>@item.Description</td>
                                 <td>@item.Price</td>
                                 <td>@item.SKU</td>
-                                <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
+                                <td>
+                                    @item.CreatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    <br />
+                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                </td>
                                 <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
                                 <td>
                                     <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>

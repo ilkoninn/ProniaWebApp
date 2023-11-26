@@ -80,7 +80,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 Description = productVM.Description,
                 Price = productVM.Price,
                 SKU = productVM.SKU,
-                CategoryId = int.Parse(productVM.CategoryId)
+                CategoryId = int.Parse(productVM.CategoryId),
+                CreatedDate = DateTime.Now,
+                LastUpdatedDate = DateTime.Now,
             };
 
             _db.Products.Add(newProduct);
@@ -156,6 +158,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldProduct.Price = productVM.Price;
             oldProduct.SKU = productVM.SKU;
             oldProduct.CategoryId = int.Parse(productVM.CategoryId);
+            oldProduct.LastUpdatedDate = DateTime.Now;
+            oldProduct.CreatedDate = oldProduct.CreatedDate;
 
             await _db.SaveChangesAsync();
 

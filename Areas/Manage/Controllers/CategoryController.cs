@@ -40,8 +40,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View(categoryVM);
             }
 
-            Category newCategory = new Category();
-            newCategory.Name = categoryVM.Name;
+            Category newCategory = new Category 
+            {
+                Name = categoryVM.Name,
+                CreatedDate = DateTime.Now,
+                LastUpdatedDate = DateTime.Now,
+            };
 
             _db.Categories.Add(newCategory);
             await _db.SaveChangesAsync();
@@ -61,7 +65,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             Category oldCategory = await _db.Categories.FindAsync(Id);
             CategoryVM categoryVM = new CategoryVM 
             {
-                Name = oldCategory.Name
+                Name = oldCategory.Name,
             };
 
             return View(categoryVM);
@@ -83,6 +87,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             Category oldCategory = await _db.Categories.FindAsync(categoryVM.Id);
             oldCategory.Name = categoryVM.Name;
+            oldCategory.LastUpdatedDate = DateTime.Now;
+            oldCategory.CreatedDate = oldCategory.CreatedDate;
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

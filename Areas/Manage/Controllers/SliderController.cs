@@ -40,8 +40,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             var existsSubTitle = await _db.Sliders.FirstOrDefaultAsync(x => x.SubTitle == sliderVM.SubTitle) != null;
             var existsDescription = await _db.Sliders.FirstOrDefaultAsync(x => x.Description == sliderVM.Description) != null;
 
-            Slider newSlider = new Slider();
-
             if (existsImgFile)
             {
                 ModelState.AddModelError("ImageFile", "Image should be uploaded!");
@@ -69,24 +67,25 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             if (!sliderVM.ImageFile.ContentType.Contains("image"))
             {
                 ModelState.AddModelError("ImageFile", "You can upload only images");
-                return View(sliderVM);
             }
             if (sliderVM.ImageFile.Length > 2097152)
             {
                 ModelState.AddModelError("ImageFile", "The maximum size of image is 2MB!");
+            }
+            if (!ModelState.IsValid)
+            {
                 return View(sliderVM);
             }
 
-            newSlider.ImgUrl = sliderVM.ImageFile.Upload(_env.WebRootPath, @"\Upload\SliderImages\");
-
-            if (!ModelState.IsValid)
+            Slider newSlider = new Slider 
             {
-                return View(newSlider);
-            }
-
-            newSlider.Title = sliderVM.Title;
-            newSlider.SubTitle = sliderVM.SubTitle;
-            newSlider.Description = sliderVM.Description;
+                Title = sliderVM.Title,
+                SubTitle = sliderVM.SubTitle,
+                Description = sliderVM.Description,
+                ImgUrl = sliderVM.ImageFile.Upload(_env.WebRootPath, @"\Upload\SliderImages\"),
+                CreatedDate = DateTime.Now,
+                LastUpdatedDate = DateTime.Now,
+            };
 
             _db.Sliders.Add(newSlider);
             await _db.SaveChangesAsync();
@@ -169,6 +168,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldSlider.Title = sliderVM.Title;
             oldSlider.SubTitle = sliderVM.SubTitle;
             oldSlider.Description = sliderVM.Description;
+            oldSlider.LastUpdatedDate = DateTime.Now;
+            oldSlider.CreatedDate = oldSlider.CreatedDate;
 
             await _db.SaveChangesAsync();
 

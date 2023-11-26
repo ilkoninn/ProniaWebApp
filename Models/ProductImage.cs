@@ -11,6 +11,8 @@ namespace ProniaWebApp.Models
         public Product Product { get; set; }
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
 
     }
 }

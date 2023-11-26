@@ -40,8 +40,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View(tagVM);
             }
 
-            Tag newTag = new Tag();
-            newTag.Name = tagVM.Name;
+            Tag newTag = new Tag 
+            {
+                Name = tagVM.Name,
+                CreatedDate = DateTime.Now,
+                LastUpdatedDate = DateTime.Now,
+            };
 
             _db.Tags.Add(newTag);
             await _db.SaveChangesAsync();
@@ -83,6 +87,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             Tag oldTag = await _db.Tags.FindAsync(tagVM.Id);
             oldTag.Name = tagVM.Name;
+            oldTag.LastUpdatedDate = DateTime.Now;
+            oldTag.CreatedDate = oldTag.CreatedDate;
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

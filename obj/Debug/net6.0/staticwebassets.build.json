@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sSzu1QDNL1dO7d7M3r0RZLCKmz5NHeBzBRl4wx7kRBA=",
+  "Hash": "N5aPFIhu3tAIIk/mpAhFJHNvOZodcqKSELwF9yUKRLo=",
   "Source": "ProniaWebApp",
   "BasePath": "_content/ProniaWebApp",
   "Mode": "Default",
@@ -35156,12 +35156,12 @@
       "OriginalItemSpec": "wwwroot\\manage\\vendor\\jquery-easing\\jquery.easing.min.js"
     },
     {
-      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png",
+      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\22e246e2-cd68-461b-bf3b-c296d029219dScreenshot 2023-11-12 190852.png",
       "SourceId": "ProniaWebApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
       "BasePath": "_content/ProniaWebApp",
-      "RelativePath": "Upload/ProductImages/13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png",
+      "RelativePath": "Upload/ProductImages/22e246e2-cd68-461b-bf3b-c296d029219dScreenshot 2023-11-12 190852.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -35170,15 +35170,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\ProductImages\\13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png"
+      "OriginalItemSpec": "wwwroot\\Upload\\ProductImages\\22e246e2-cd68-461b-bf3b-c296d029219dScreenshot 2023-11-12 190852.png"
     },
     {
-      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png",
+      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\82da9896-b25b-4259-873c-ded98bcb04aaScreenshot 2023-11-12 190800.png",
       "SourceId": "ProniaWebApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
       "BasePath": "_content/ProniaWebApp",
-      "RelativePath": "Upload/ProductImages/46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png",
+      "RelativePath": "Upload/SliderImages/82da9896-b25b-4259-873c-ded98bcb04aaScreenshot 2023-11-12 190800.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -35187,58 +35187,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\ProductImages\\46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png"
-    },
-    {
-      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png",
-      "SourceId": "ProniaWebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
-      "BasePath": "_content/ProniaWebApp",
-      "RelativePath": "Upload/ProductImages/83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\ProductImages\\83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png"
-    },
-    {
-      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png",
-      "SourceId": "ProniaWebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
-      "BasePath": "_content/ProniaWebApp",
-      "RelativePath": "Upload/SliderImages/897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\SliderImages\\897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png"
-    },
-    {
-      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\b337e1fe-1040-4d78-b148-7a8b1d45db4eScreenshot 2023-06-27 152119.png",
-      "SourceId": "ProniaWebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
-      "BasePath": "_content/ProniaWebApp",
-      "RelativePath": "Upload/SliderImages/b337e1fe-1040-4d78-b148-7a8b1d45db4eScreenshot 2023-06-27 152119.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\SliderImages\\b337e1fe-1040-4d78-b148-7a8b1d45db4eScreenshot 2023-06-27 152119.png"
+      "OriginalItemSpec": "wwwroot\\Upload\\SliderImages\\82da9896-b25b-4259-873c-ded98bcb04aaScreenshot 2023-11-12 190800.png"
     }
   ]
 }

@@ -110,11 +110,14 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             }
 
             productImageVM.ImgUrl = productImageVM.ImageFile.Upload(_env.WebRootPath, @"\Upload\ProductImages\");
-            ProductImage newProductImage = new ProductImage();
-
-            newProductImage.ImgUrl = productImageVM.ImgUrl;
-            newProductImage.ProductId = int.Parse(productImageVM.ProductId);
-            newProductImage.IsPrime = productImageVM.IsPrime;
+            ProductImage newProductImage = new ProductImage 
+            {
+                ImgUrl = productImageVM.ImgUrl,
+                ProductId = int.Parse(productImageVM.ProductId),
+                IsPrime = productImageVM.IsPrime,
+                CreatedDate = DateTime.Now,
+                LastUpdatedDate = DateTime.Now,
+            };
 
             _db.ProductImages.Add(newProductImage);
             await _db.SaveChangesAsync();
@@ -130,7 +133,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             ProductImageVM productImageVM = new ProductImageVM
             {
                 IsPrime = oldProductImage.IsPrime,
-                ImgUrl = oldProductImage.ImgUrl,
+                ImageFile = oldProductImage.ImageFile,
                 ProductId = $"{oldProductImage.ProductId}",
                 Products = await _db.Products.ToListAsync(),
             };
@@ -220,6 +223,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldProductImage.ImgUrl = productImageVM.ImgUrl;
             oldProductImage.ProductId = int.Parse(productImageVM.ProductId);
             oldProductImage.IsPrime = productImageVM.IsPrime;
+            oldProductImage.LastUpdatedDate = DateTime.Now;
+            oldProductImage.CreatedDate = oldProductImage.CreatedDate;
 
             await _db.SaveChangesAsync();
 
