@@ -72,9 +72,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(TagVM tagVM)
         {
-            if (await _db.Tags.FirstOrDefaultAsync(x => x.Name == tagVM.Name) != null)
+            var existsName = await _db.Tags.Where(tag => tag.Name == tagVM.Name && tag.Id != tagVM.Id)
+                .FirstOrDefaultAsync() != null;
+
+            if (existsName)
             {
-                ModelState.AddModelError("Name", "There is a same name Tag in Table!");
+                ModelState.AddModelError("Name", "There is a same name tag in Table!");
                 return View(tagVM);
             }
 

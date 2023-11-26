@@ -72,7 +72,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(CategoryVM categoryVM)
         {
-            if (await _db.Categories.FirstOrDefaultAsync(x => x.Name == categoryVM.Name) != null)
+            var existsName = await _db.Categories.Where(cat => cat.Name == categoryVM.Name && cat.Id != categoryVM.Id).FirstOrDefaultAsync() != null;
+
+            if (existsName)
             {
                 ModelState.AddModelError("Name", "There is a same name category in Table!");
                 return View(categoryVM);

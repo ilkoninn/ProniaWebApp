@@ -202,17 +202,17 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View(productImageVM);
             }
 
-            var oldProduct = await _db.Products
-                .Include(p => p.ProductImage)
-                .FirstOrDefaultAsync(p => p.Id == int.Parse(productImageVM.ProductId));
-            var existsAnyPrimaryImage = oldProduct.ProductImage
-                .Where(p => p.IsPrime == true &&  p.Id != productImageVM.Id)
-                .FirstOrDefault();
+            //var oldProduct = await _db.Products
+            //    .Include(p => p.ProductImage)
+            //    .FirstOrDefaultAsync(p => p.Id == int.Parse(productImageVM.ProductId));
+            //var existsAnyPrimaryImage = oldProduct.ProductImage
+            //    .Where(p => p.IsPrime == true &&  p.Id != productImageVM.Id)
+            //    .FirstOrDefault();
 
-            if (existsAnyPrimaryImage == null)
-            {
-                productImageVM.IsPrime = true;
-            }
+            //if (existsAnyPrimaryImage == null)
+            //{
+            //    productImageVM.IsPrime = true;
+            //}
 
             FileManager.Delete(oldProductImage.ImgUrl, _env.WebRootPath, @"\Upload\ProductImages\");
             productImageVM.ImgUrl = productImageVM.ImageFile.Upload(_env.WebRootPath, @"\Upload\ProductImages\");
