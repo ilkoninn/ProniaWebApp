@@ -15,5 +15,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             return View();
         }
+        public IActionResult NotFound()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,47 @@
+﻿@model ProductImageVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Create Slider</h1>
+    <form method="post" enctype="multipart/form-data" class="row g-3 mx-5">
+        <div class="row">
+            <div class="col-12 mt-4">
+                <label asp-for="IsPrime">Is this image primary?</label>
+                <br />
+                <input asp-for="IsPrime">
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="IsPrime"></span>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <label asp-for="ImageFile" class="form-label">Image File</label>
+                <input asp-for="ImageFile" class="form-control">
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="ImageFile"></span>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <label asp-for="ProductId" class="form-label">Product</label>
+                <br />
+                <select asp-for="ProductId" class="form-select">
+                    <option value="null">Choose Product</option>
+                    @foreach (var product in Model.Products)
+                    {
+                        <option value="@product.Id">@product.Title</option>
+                    }
+                </select>
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="ProductId"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4 mx-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button asp-controller="ProductImage" asp-action="Table" type="submit" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+
+</div>
+<!-- /.container-fluid -->

@@ -27,7 +27,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
         // <--- Create Section --->
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
@@ -98,17 +98,16 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             Slider oldSlider = await _db.Sliders.FindAsync(Id);
+         
+            if (oldSlider == null) return RedirectToAction("NotFound", "AdminHome");
+
             SliderVM sliderVM = new SliderVM
             {
                 Title = oldSlider.Title,
                 SubTitle = oldSlider.SubTitle,
                 Description = oldSlider.Description,
+                ImageFile = oldSlider.ImageFile
             };
 
             return View(sliderVM);
@@ -117,6 +116,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SliderVM sliderVM)
         {
+            if (sliderVM.Id == null) return RedirectToAction("NotFound", "AdminHome");
+
             Slider oldSlider = _db.Sliders.Find(sliderVM.Id);
 
             var existsImgFile = sliderVM.ImageFile == null;
@@ -149,12 +150,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             if (!sliderVM.ImageFile.ContentType.Contains("image"))
             {
                 ModelState.AddModelError("ImageFile", "You can upload only images");
-                return View();
+                return View(sliderVM);
             }
             if (sliderVM.ImageFile.Length > 2097152)
             {
                 ModelState.AddModelError("ImageFile", "The maximum size of image is 2MB!");
-                return View();
+                return View(sliderVM);
             }
 
             FileManager.Delete(oldSlider.ImgUrl, _env.WebRootPath, @"\Upload\SliderImages\");
@@ -162,7 +163,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(sliderVM);
             }
 
             oldSlider.Title = sliderVM.Title;
@@ -184,5 +185,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             return RedirectToAction("Table");
         }
+
     }
 }

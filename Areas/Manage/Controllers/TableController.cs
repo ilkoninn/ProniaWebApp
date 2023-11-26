@@ -11,35 +11,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             _db = appDb;
         }
        
-        public async Task<IActionResult> TagTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.tags = await _db.Tags.ToListAsync();
-            
-            return View(adminVM);
-        }
-        public async Task<IActionResult> ProductTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.products = await _db.Products
-                .Include(x => x.Category)
-                .ToListAsync();
-            
-            return View(adminVM);
-        }
         public async Task<IActionResult> BlogTable()
         {
             AdminVM adminVM = new AdminVM();
             adminVM.blogs = await _db.Blogs
                 .Include(x => x.Category)
                 .ToListAsync();
-
-            return View(adminVM);
-        }
-        public async Task<IActionResult> SliderTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.sliders = await _db.Sliders.ToListAsync();
 
             return View(adminVM);
         }
@@ -52,14 +29,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             return View(adminVM);
         }
-        public async Task<IActionResult> ProductImagesTable()
-        {
-            AdminVM adminVM = new AdminVM();
-            adminVM.productImages = await _db.ProductImages
-                .Include(x => x.Product)
-                .ToListAsync();
-
-            return View(adminVM);
-        }
+        
     }
 }

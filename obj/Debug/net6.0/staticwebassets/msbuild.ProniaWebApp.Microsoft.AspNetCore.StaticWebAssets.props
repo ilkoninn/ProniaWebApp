@@ -33072,12 +33072,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\manage\vendor\jquery\jquery.slim.min.map))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\SliderImages\2afeb18f-2362-46db-86ce-eedc44103defScreenshot 2023-06-26 115649.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png))">
       <SourceType>Package</SourceType>
       <SourceId>ProniaWebApp</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ProniaWebApp</BasePath>
-      <RelativePath>Upload/SliderImages/2afeb18f-2362-46db-86ce-eedc44103defScreenshot 2023-06-26 115649.png</RelativePath>
+      <RelativePath>Upload/ProductImages/13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -33086,7 +33086,55 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\SliderImages\2afeb18f-2362-46db-86ce-eedc44103defScreenshot 2023-06-26 115649.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\13214c09-4348-4ed1-9291-bc20b3847178Screenshot 2023-07-24 153823.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProniaWebApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProniaWebApp</BasePath>
+      <RelativePath>Upload/ProductImages/46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\46280685-dc70-45b2-ac52-8df14d99d01eScreenshot 2023-07-24 145417.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProniaWebApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProniaWebApp</BasePath>
+      <RelativePath>Upload/ProductImages/83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\ProductImages\83bed031-1b4f-4c7d-a89b-71d9e27bb17bScreenshot 2023-06-27 152119.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\SliderImages\897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProniaWebApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProniaWebApp</BasePath>
+      <RelativePath>Upload/SliderImages/897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\SliderImages\897fe4ab-aa33-47a5-8157-d559dbe3671bScreenshot 2023-07-01 174025.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\SliderImages\b337e1fe-1040-4d78-b148-7a8b1d45db4eScreenshot 2023-06-27 152119.png))">
       <SourceType>Package</SourceType>

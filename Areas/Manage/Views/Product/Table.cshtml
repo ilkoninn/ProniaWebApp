@@ -22,6 +22,7 @@
                             <th>Price</th>
                             <th>SKU(Code)</th>
                             <th>Category Name</th>
+                            <th>Tags Name</th>
                             <th>Change Section</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                             <th>Price</th>
                             <th>SKU(Code)</th>
                             <th>Category Name</th>
+                            <th>Tags Name</th>
                             <th>Change Section</th>
                         </tr>
                     </tfoot>
@@ -49,6 +51,7 @@
                                 <td>@item.Description</td>
                                 <td>@item.Price</td>
                                 <td>@item.SKU</td>
+                                <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
                                 <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
                                 <td>
                                     <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>

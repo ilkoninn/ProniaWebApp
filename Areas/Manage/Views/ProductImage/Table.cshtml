@@ -1,0 +1,64 @@
+﻿@model AdminVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Blog Images Table</h1>
+        <a asp-controller="ProductImage" asp-action="Create" class="btn btn-primary">Create</a>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 mt-5">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No:</th>
+                            <th>Image</th>
+                            <th>IsPrimary</th>
+                            <th>Blog Title</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No:</th>
+                            <th>Image</th>
+                            <th>IsPrimary</th>
+                            <th>Blog Title</th>
+                            <th>Change Section</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model.productImages)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>
+                                    <div style="width:100px">
+                                        <img width="100%" src="~/Upload/ProductImages/@item.ImgUrl">
+                                    </div>
+                                </td>
+                                <th>@item.IsPrime</th>
+                                <td>@Model.products.FirstOrDefault(x => x.Id == item.ProductId).Title</td>
+                                <td>
+                                    <a asp-controller="ProductImage" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
+                                    <a asp-controller="ProductImage" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

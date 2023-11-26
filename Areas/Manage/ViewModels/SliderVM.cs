@@ -8,6 +8,6 @@ namespace ProniaWebApp.Areas.Manage.ViewModels
         public string SubTitle { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public IFormFile? ImageFile { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }
