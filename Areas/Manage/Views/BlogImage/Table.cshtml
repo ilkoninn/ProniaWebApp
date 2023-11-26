@@ -6,7 +6,7 @@
     <!-- Page Heading -->
     <div class="d-flex justify-content-between">
         <h1 class="h3 mb-2 text-gray-800">Blog Images Table</h1>
-        <a asp-controller="ProductImage" asp-action="Create" class="btn btn-primary">Create</a>
+        <a asp-controller="BlogImage" asp-action="Create" class="btn btn-primary">Create</a>
     </div>
 
     <!-- DataTales Example -->
@@ -18,8 +18,7 @@
                         <tr>
                             <th>No:</th>
                             <th>Image</th>
-                            <th>IsPrimary</th>
-                            <th>Product Title</th>
+                            <th>Blog Title</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Change Section</th>
@@ -29,8 +28,7 @@
                         <tr>
                             <th>No:</th>
                             <th>Image</th>
-                            <th>IsPrimary</th>
-                            <th>Product Title</th>
+                            <th>Blog Title</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Change Section</th>
@@ -40,18 +38,17 @@
                         @{
                             var count = 0;
                         }
-                        @foreach (var item in Model.productImages)
+                        @foreach (var item in Model.blogImages)
                         {
                             count++;
                             <tr>
                                 <td>@count</td>
                                 <td>
                                     <div style="width:100px">
-                                        <img width="100%" src="~/Upload/ProductImages/@item.ImgUrl">
+                                        <img width="100%" src="~/Upload/BlogImages/@item.ImgUrl">
                                     </div>
                                 </td>
-                                <th>@item.IsPrime</th>
-                                <td>@Model.products.FirstOrDefault(x => x.Id == item.ProductId).Title</td>
+                                <td>@Model.blogs.FirstOrDefault(x => x.Id == item.BlogId).Title</td>
                                 <td>
                                     @item.CreatedDate.ToString("HH:mm")
                                     <br />
@@ -63,8 +60,8 @@
                                     @item.LastUpdatedDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
-                                    <a asp-controller="ProductImage" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
-                                    <a asp-controller="ProductImage" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                    <a asp-controller="BlogImage" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
+                                    <a asp-controller="BlogImage" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         }

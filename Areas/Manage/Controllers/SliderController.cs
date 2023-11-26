@@ -1,5 +1,6 @@
 ﻿
 using Azure;
+using ProniaWebApp.Areas.Manage.ViewModels;
 using ProniaWebApp.Models;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
@@ -115,8 +116,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SliderVM sliderVM)
         {
-            if (sliderVM.Id == null) return RedirectToAction("NotFound", "AdminHome");
-
             Slider oldSlider = _db.Sliders.Find(sliderVM.Id);
 
             var existsImgFile = sliderVM.ImageFile == null;

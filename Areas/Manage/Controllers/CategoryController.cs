@@ -1,4 +1,7 @@
 ﻿
+using ProniaWebApp.Areas.Manage.ViewModels;
+using ProniaWebApp.Models;
+
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -29,7 +32,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoryVM categoryVM)
         {
-            if(await _db.Categories.FirstOrDefaultAsync(x => x.Name == categoryVM.Name) != null)
+            if (await _db.Categories.FirstOrDefaultAsync(x => x.Name == categoryVM.Name) != null)
             {
                 ModelState.AddModelError("Name", "There is a same name category in Table!");
                 return View(categoryVM);
@@ -57,11 +60,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             Category oldCategory = await _db.Categories.FindAsync(Id);
             CategoryVM categoryVM = new CategoryVM 
             {

@@ -5,6 +5,6 @@ global using ProniaWebApp.DAL;
 global using ProniaWebApp.ViewModels;
 global using ProniaWebApp.Areas.Manage.ViewModels;
 global using BB205_Pronia.Helpers;
-
+global using Microsoft.CodeAnalysis;
 
 

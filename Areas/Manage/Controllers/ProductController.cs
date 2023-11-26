@@ -39,7 +39,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductVM productVM)
         {
-
             var existsTitle = await _db.Products.FirstOrDefaultAsync(x => x.Title == productVM.Title) != null;
             var existsDescription = await _db.Products.FirstOrDefaultAsync(x => x.Description == productVM.Description) != null;
             var existsSKUCode = await _db.Products.FirstOrDefaultAsync(x => x.SKU == productVM.SKU) != null;
@@ -95,11 +94,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             Product oldProduct = await _db.Products.FindAsync(Id);
             ProductVM productVM = new ProductVM
             {
@@ -141,11 +135,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 ModelState.AddModelError("SKU", "There is a same SKU code product in Table!");
             }
 
-            if (ModelState.ErrorCount > 0)
-            {
-                productVM.Categories = await _db.Categories.ToListAsync();
-                return View(productVM);
-            }
+            //if (ModelState.ErrorCount > 0)
+            //{
+            //    productVM.Categories = await _db.Categories.ToListAsync();
+            //    return View(productVM);
+            //}
 
             if (!ModelState.IsValid)
             {

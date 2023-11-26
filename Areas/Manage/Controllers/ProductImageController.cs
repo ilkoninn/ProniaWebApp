@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Microsoft.Identity.Client;
 using ProniaWebApp.Areas.Manage.ViewModels;
 using ProniaWebApp.Models;
@@ -144,8 +143,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(ProductImageVM productImageVM)
         {
-            if (productImageVM.Id == null) return RedirectToAction("NotFound", "AdminHome");
-
             ProductImage oldProductImage = await _db.ProductImages.FindAsync(productImageVM.Id);
 
             if (productImageVM.ImageFile == null)

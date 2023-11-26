@@ -1,4 +1,7 @@
 ﻿
+using ProniaWebApp.Areas.Manage.ViewModels;
+using ProniaWebApp.Models;
+
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -57,11 +60,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             Tag oldTag = await _db.Tags.FindAsync(Id);
             TagVM tagVM = new TagVM
             {

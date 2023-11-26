@@ -9,10 +9,11 @@ namespace ProniaWebApp.Models
         public bool IsPrime { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        [NotMapped]
-        public IFormFile? ImageFile { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+      
 
     }
 }

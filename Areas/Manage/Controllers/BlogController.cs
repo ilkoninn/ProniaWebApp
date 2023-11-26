@@ -39,7 +39,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(BlogVM blogVM)
         {
-
             var existsTitle = await _db.Blogs.FirstOrDefaultAsync(x => x.Title == blogVM.Title) != null;
             var existsDescription = await _db.Blogs.FirstOrDefaultAsync(x => x.Description == blogVM.Description) != null;
 
@@ -88,11 +87,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             Blog oldBlog = await _db.Blogs.FindAsync(Id);
             BlogVM blogVM = new BlogVM
             {

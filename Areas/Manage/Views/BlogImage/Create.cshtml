@@ -1,0 +1,39 @@
+﻿@model BlogImageVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Create Slider</h1>
+    <form method="post" enctype="multipart/form-data" class="row g-3 mx-5">
+        <div class="row">
+            <div class="col-12 mt-4">
+                <label asp-for="ImageFile" class="form-label">Image File</label>
+                <input asp-for="ImageFile" class="form-control">
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="ImageFile"></span>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <label asp-for="BlogId" class="form-label">Blog</label>
+                <br />
+                <select asp-for="BlogId" class="form-select">
+                    <option value="null">Choose Blog</option>
+                    @foreach (var Blog in Model.Blogs)
+                    {
+                        <option value="@Blog.Id">@Blog.Title</option>
+                    }
+                </select>
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="BlogId"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4 mx-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button asp-controller="BlogImage" asp-action="Table" type="submit" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+
+</div>
+<!-- /.container-fluid -->
