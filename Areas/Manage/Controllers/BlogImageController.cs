@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
-using ProniaWebApp.Areas.Manage.ViewModels;
-using ProniaWebApp.Models;
+﻿
 
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
@@ -95,7 +92,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            BlogImage oldBlogImage = await _db.BlogsImages.FindAsync(Id);
+            BlogImage oldBlogImage = await _db.BlogsImages.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldBlogImage == null) return RedirectToAction("NotFound", "AdminHome");
+
             BlogImageVM BlogImageVM = new BlogImageVM
             {
                 ImageFile = oldBlogImage.ImageFile,
@@ -109,7 +108,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(BlogImageVM BlogImageVM)
         {
-            BlogImage oldBlogImage = await _db.BlogsImages.FindAsync(BlogImageVM.Id);
+            BlogImage oldBlogImage = await _db.BlogsImages.FirstOrDefaultAsync(x => x.Id == BlogImageVM.Id);
+            if (oldBlogImage == null) return RedirectToAction("NotFound", "AdminHome");
 
             if (BlogImageVM.ImageFile == null)
             {
@@ -157,9 +157,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            BlogImage BlogImage = await _db.BlogsImages.FindAsync(Id);
-            _db.BlogsImages.Remove(BlogImage);
-            FileManager.Delete(BlogImage.ImgUrl, _env.WebRootPath, @"\Upload\BlogImages\");
+            BlogImage oldBlogImage = await _db.BlogsImages.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldBlogImage == null) return RedirectToAction("NotFound", "AdminHome");
+            
+            _db.BlogsImages.Remove(oldBlogImage);
+            FileManager.Delete(oldBlogImage.ImgUrl, _env.WebRootPath, @"\Upload\BlogImages\");
 
             await _db.SaveChangesAsync();
 

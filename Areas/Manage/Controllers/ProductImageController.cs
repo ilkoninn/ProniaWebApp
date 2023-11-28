@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
-using ProniaWebApp.Areas.Manage.ViewModels;
-using ProniaWebApp.Models;
-
+﻿
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -128,7 +124,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            ProductImage oldProductImage = await _db.ProductImages.FindAsync(Id);
+            ProductImage oldProductImage = await _db.ProductImages.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldProductImage == null) return RedirectToAction("NotFound", "AdminHome");
+
             ProductImageVM productImageVM = new ProductImageVM
             {
                 IsPrime = oldProductImage.IsPrime,
@@ -143,7 +141,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(ProductImageVM productImageVM)
         {
-            ProductImage oldProductImage = await _db.ProductImages.FindAsync(productImageVM.Id);
+            ProductImage oldProductImage = await _db.ProductImages.FirstOrDefaultAsync(x => x.Id == productImageVM.Id);
+            if (oldProductImage == null) return RedirectToAction("NotFound", "AdminHome");
 
             if (productImageVM.ImageFile == null)
             {
@@ -231,8 +230,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            ProductImage productImage = await _db.ProductImages.FindAsync(Id);
-            _db.ProductImages.Remove(productImage);
+            ProductImage oldProductImage = await _db.ProductImages.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldProductImage == null) return RedirectToAction("NotFound", "AdminHome");
+            _db.ProductImages.Remove(oldProductImage);
 
             var oldProduct = await _db.Products
                 .Include(p => p.ProductImage)
@@ -251,7 +251,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             }
 
             await _db.SaveChangesAsync();
-            FileManager.Delete(productImage.ImgUrl, _env.WebRootPath, @"\Upload\ProductImages\");
+            FileManager.Delete(oldProductImage.ImgUrl, _env.WebRootPath, @"\Upload\ProductImages\");
 
             return RedirectToAction("Table");
         }

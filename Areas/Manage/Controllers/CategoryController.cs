@@ -1,6 +1,4 @@
 ﻿
-using ProniaWebApp.Areas.Manage.ViewModels;
-using ProniaWebApp.Models;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
@@ -60,7 +58,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            Category oldCategory = await _db.Categories.FindAsync(Id);
+            Category oldCategory = await _db.Categories.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldCategory == null) return RedirectToAction("NotFound", "AdminHome");
+
             CategoryVM categoryVM = new CategoryVM 
             {
                 Name = oldCategory.Name,
@@ -72,7 +72,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(CategoryVM categoryVM)
         {
+
             var existsName = await _db.Categories.Where(cat => cat.Name == categoryVM.Name && cat.Id != categoryVM.Id).FirstOrDefaultAsync() != null;
+
 
             if (existsName)
             {
@@ -85,7 +87,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View();
             }
 
-            Category oldCategory = await _db.Categories.FindAsync(categoryVM.Id);
+            Category oldCategory = await _db.Categories.FirstOrDefaultAsync(x => x.Id == categoryVM.Id);
+            if (oldCategory == null) return RedirectToAction("NotFound", "AdminHome"); 
+            
             oldCategory.Name = categoryVM.Name;
             oldCategory.UpdatedDate = DateTime.Now;
             oldCategory.CreatedDate = oldCategory.CreatedDate;
@@ -98,8 +102,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Category Category = await _db.Categories.FindAsync(Id);
-            _db.Categories.Remove(Category);
+            Category oldCategory = await _db.Categories.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldCategory == null) return RedirectToAction("NotFound", "AdminHome");
+
+            _db.Categories.Remove(oldCategory);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

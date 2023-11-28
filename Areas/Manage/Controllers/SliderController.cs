@@ -1,8 +1,4 @@
 ﻿
-using Azure;
-using ProniaWebApp.Areas.Manage.ViewModels;
-using ProniaWebApp.Models;
-
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
@@ -98,8 +94,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            Slider oldSlider = await _db.Sliders.FindAsync(Id);
-         
+            Slider oldSlider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == Id);
             if (oldSlider == null) return RedirectToAction("NotFound", "AdminHome");
 
             SliderVM sliderVM = new SliderVM
@@ -116,7 +111,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SliderVM sliderVM)
         {
-            Slider oldSlider = _db.Sliders.Find(sliderVM.Id);
+            Slider oldSlider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == sliderVM.Id);
+            if (oldSlider == null) return RedirectToAction("NotFound", "AdminHome");
 
             var existsImgFile = sliderVM.ImageFile == null;
             var existsTitle = await _db.Sliders.Where(slider => slider.Title == sliderVM.Title && slider.Id != sliderVM.Id).FirstOrDefaultAsync() != null;
@@ -178,10 +174,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Slider Slider = await _db.Sliders.FindAsync(Id);
-            _db.Sliders.Remove(Slider);
+            Slider oldSlider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldSlider == null) return RedirectToAction("NotFound", "AdminHome");
+            _db.Sliders.Remove(oldSlider);
             await _db.SaveChangesAsync();
-            FileManager.Delete(Slider.ImgUrl, _env.WebRootPath, @"\Upload\SliderImages\");
+            FileManager.Delete(oldSlider.ImgUrl, _env.WebRootPath, @"\Upload\SliderImages\");
 
             return RedirectToAction("Table");
         }

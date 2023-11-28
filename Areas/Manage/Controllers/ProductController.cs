@@ -1,5 +1,6 @@
 ﻿
-using ProniaWebApp.Areas.Manage.ViewModels;
+
+using Microsoft.EntityFrameworkCore;
 using ProniaWebApp.Models;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
@@ -17,7 +18,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Table()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.products = await _db.Products.ToListAsync();
+            adminVM.products = await _db.Products
+                .Include(x => x.Tags)
+                .ThenInclude(x => x.Tag)
+                .ToListAsync();
             adminVM.categories = await _db.Categories.ToListAsync();
 
             return View(adminVM);
@@ -29,9 +33,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Create()
         {
             ICollection<Category> categories = await _db.Categories.ToListAsync();
+            ICollection<Tag> tags = await _db.Tags.ToListAsync();
+
             ProductVM productVM = new ProductVM 
             {
                 Categories = categories,
+                Tags = tags,
             };  
             return View(productVM);
         }
@@ -84,6 +91,28 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 UpdatedDate = DateTime.Now,
             };
 
+            if(productVM.TagIds != null)
+            {
+                foreach (var item in productVM.TagIds)
+                {
+                    bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
+
+                    if (!existsTag)
+                    {
+                        ModelState.AddModelError("TagIds", "There is no tag like this!");
+                        return View(productVM);
+                    }
+
+                    ProductTag productTag = new ProductTag()
+                    {
+                        Product = newProduct,
+                        TagId = item,
+                    };
+
+                    _db.ProductTags.Add(productTag);
+                }
+            }
+
             _db.Products.Add(newProduct);
             await _db.SaveChangesAsync();
 
@@ -94,7 +123,14 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            Product oldProduct = await _db.Products.FindAsync(Id);
+            Product oldProduct = await _db.Products
+                .Include(x => x.Tags)
+                .ThenInclude(pt => pt.Tag)
+                .Where(c => c.Id == Id)
+                .FirstOrDefaultAsync();
+
+            if (oldProduct == null) return RedirectToAction("NotFound", "AdminHome");
+
             ProductVM productVM = new ProductVM
             {
                 Title = oldProduct.Title,
@@ -103,6 +139,8 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 SKU = oldProduct.SKU,
                 CategoryId = $"{oldProduct.CategoryId}",
                 Categories = await _db.Categories.ToListAsync(),
+                Tags = await _db.Tags.ToListAsync(),
+                TagIds = oldProduct.Tags.Select(pt => pt.TagId).ToList(),
             };
 
             return View(productVM);
@@ -111,7 +149,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(ProductVM productVM)
         {
-            Product oldProduct = _db.Products.Find(productVM.Id);
+            Product oldProduct = await _db.Products
+                .Include(x => x.Tags)
+                .FirstOrDefaultAsync(x => x.Id == productVM.Id);
+            if (oldProduct == null) return RedirectToAction("NotFound", "AdminHome");
 
             var existsTitle = await _db.Products.Where(product => product.Title == productVM.Title && product.Id != productVM.Id).FirstOrDefaultAsync() != null;
             var existsDescription = await _db.Products.Where(product => product.Description == productVM.Description && product.Id != productVM.Id).FirstOrDefaultAsync() != null;
@@ -155,6 +196,30 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldProduct.UpdatedDate = DateTime.Now;
             oldProduct.CreatedDate = oldProduct.CreatedDate;
 
+            oldProduct.Tags.Clear();
+
+            if (productVM.TagIds != null)
+            {
+
+                foreach (var item in productVM.TagIds)
+                {
+                    bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
+
+                    if (!existsTag)
+                    {
+                        ModelState.AddModelError("TagIds", "There is no tag like this!");
+                        return View(productVM);
+                    }
+
+                    ProductTag productTag = new ProductTag()
+                    {
+                        TagId = item,
+                    };
+
+                    oldProduct.Tags.Add(productTag);
+                }
+            }
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");
@@ -163,8 +228,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Product Product = await _db.Products.FindAsync(Id);
-            _db.Products.Remove(Product);
+            Product oldProduct = await _db.Products.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldProduct == null) return RedirectToAction("NotFound", "AdminHome");
+
+            _db.Products.Remove(oldProduct);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

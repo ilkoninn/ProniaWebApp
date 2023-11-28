@@ -1,10 +1,8 @@
-﻿using System.Drawing;
-
+﻿
 namespace ProniaWebApp.Areas.Manage.ViewModels
 {
-    public class ProductImageVM
+    public class ProductImageVM : BaseAuditableEntityVM
     {
-        public int Id { get; set; }
         public bool IsPrime { get; set; }
         public string? ImgUrl { get; set; }
         public string ProductId { get; set; }

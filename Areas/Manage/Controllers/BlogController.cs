@@ -17,7 +17,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Table()
         {
             AdminVM adminVM = new AdminVM();
-            adminVM.blogs = await _db.Blogs.ToListAsync();
+            adminVM.blogs = await _db.Blogs
+                .Include(x => x.Tags)
+                .ThenInclude(x => x.Tag)
+                .ToListAsync();
             adminVM.categories = await _db.Categories.ToListAsync();
 
             return View(adminVM);
@@ -29,9 +32,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Create()
         {
             ICollection<Category> categories = await _db.Categories.ToListAsync();
+            ICollection<Tag> tags = await _db.Tags.ToListAsync();
             BlogVM BlogVM = new BlogVM
             {
                 Categories = categories,
+                Tags = tags,
             };
             return View(BlogVM);
         }
@@ -77,6 +82,28 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 UpdatedDate = DateTime.Now,
             };
 
+            if (blogVM.TagIds != null)
+            {
+                foreach (var item in blogVM.TagIds)
+                {
+                    bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
+
+                    if (!existsTag)
+                    {
+                        ModelState.AddModelError("TagIds", "There is no tag like this!");
+                        return View(blogVM);
+                    }
+
+                    BlogTag blogTag = new BlogTag()
+                    {
+                        Blog = newBlog,
+                        TagId = item,
+                    };
+
+                    _db.BlogTags.Add(blogTag);
+                }
+            }
+
             _db.Blogs.Add(newBlog);
             await _db.SaveChangesAsync();
 
@@ -87,13 +114,23 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            Blog oldBlog = await _db.Blogs.FindAsync(Id);
+
+            Blog oldBlog = await _db.Blogs
+                .Include(x => x.Tags)
+                .ThenInclude(pt => pt.Tag)
+                .Where(c => c.Id == Id) 
+                .FirstOrDefaultAsync(); ;
+            if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome"); 
+
+
             BlogVM blogVM = new BlogVM
             {
                 Title = oldBlog.Title,
                 Description = oldBlog.Description,
                 CategoryId = $"{oldBlog.CategoryId}",
                 Categories = await _db.Categories.ToListAsync(),
+                Tags = await _db.Tags.ToListAsync(),
+                TagIds = oldBlog.Tags.Select(pt => pt.TagId).ToList(),
             };
 
             return View(blogVM);
@@ -102,7 +139,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(BlogVM blogVM)
         {
-            Blog oldBlog = _db.Blogs.Find(blogVM.Id);
+            Blog oldBlog = await _db.Blogs
+                .Include(x => x.Tags)
+                .FirstOrDefaultAsync(x => x.Id == blogVM.Id);
+
+            if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
             var existsTitle = await _db.Blogs
                 .Where(Blog => Blog.Title == blogVM.Title && Blog.Id != blogVM.Id)
@@ -142,6 +183,32 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldBlog.CategoryId = int.Parse(blogVM.CategoryId);
             oldBlog.UpdatedDate = DateTime.Now;
             oldBlog.CreatedDate = oldBlog.CreatedDate;
+
+            oldBlog.Tags.Clear();
+
+            if (blogVM.TagIds != null)
+            {
+
+                foreach (var item in blogVM.TagIds)
+                {
+                    bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
+
+                    if (!existsTag)
+                    {
+                        ModelState.AddModelError("TagIds", "There is no tag like this!");
+                        return View(blogVM);
+                    }
+
+                    BlogTag blogTag = new BlogTag()
+                    {
+                        Blog = oldBlog,
+                        TagId = item,
+                    };
+
+                    _db.BlogTags.Add(blogTag);
+                }
+            }
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");
@@ -150,7 +217,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Blog Blog = await _db.Blogs.FindAsync(Id);
+            Blog Blog = await _db.Blogs.FirstOrDefaultAsync(x => x.Id == Id);
+            if (Blog == null) return RedirectToAction("NotFound", "AdminHome");
+
             _db.Blogs.Remove(Blog);
             await _db.SaveChangesAsync();
 

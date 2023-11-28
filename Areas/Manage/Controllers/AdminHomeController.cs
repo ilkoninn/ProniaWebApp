@@ -1,5 +1,4 @@
 ﻿
-using ProniaWebApp.Areas.Manage.ViewModels;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
 {

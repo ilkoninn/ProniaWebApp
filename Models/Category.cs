@@ -1,4 +1,5 @@
-﻿namespace ProniaWebApp.Models
+﻿
+namespace ProniaWebApp.Models
 {
     public class Category : BaseAuditableEntity
     {

@@ -19,6 +19,7 @@
                             <th>No:</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Tags Name</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
@@ -30,6 +31,7 @@
                             <th>No:</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Tags Name</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
@@ -47,6 +49,16 @@
                                 <td>@count</td>
                                 <td>@item.Title</td>
                                 <td>@item.Description</td>
+                                <td>
+                                    @{
+                                        count = 0;
+                                    }
+                                    @foreach (var tag in item.Tags)
+                                    {
+                                        count++;
+                                        @(item.Tags.Count() != count ? tag.Tag.Name + ", " : tag.Tag.Name + "")
+                                    }
+                                </td>
                                 <td>
                                     @item.CreatedDate.ToString("HH:mm")
                                     <br/>

@@ -60,7 +60,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            Tag oldTag = await _db.Tags.FindAsync(Id);
+            Tag oldTag = await _db.Tags.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldTag == null) return RedirectToAction("NotFound", "AdminHome");
+
             TagVM tagVM = new TagVM
             {
                 Name = oldTag.Name
@@ -86,7 +88,9 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 return View();
             }
 
-            Tag oldTag = await _db.Tags.FindAsync(tagVM.Id);
+            Tag oldTag = await _db.Tags.FirstOrDefaultAsync(x => x.Id == tagVM.Id);
+            if (oldTag == null) return RedirectToAction("NotFound", "AdminHome");
+            
             oldTag.Name = tagVM.Name;
             oldTag.UpdatedDate = DateTime.Now;
             oldTag.CreatedDate = oldTag.CreatedDate;
@@ -99,8 +103,10 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Tag tag = await _db.Tags.FindAsync(Id);
-            _db.Tags.Remove(tag);
+            Tag oldTag = await _db.Tags.FirstOrDefaultAsync(x => x.Id == Id);
+            if (oldTag == null) return RedirectToAction("NotFound", "AdminHome");
+
+            _db.Tags.Remove(oldTag);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

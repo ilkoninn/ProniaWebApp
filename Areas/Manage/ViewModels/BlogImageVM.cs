@@ -1,8 +1,8 @@
-﻿namespace ProniaWebApp.Areas.Manage.ViewModels
+﻿
+namespace ProniaWebApp.Areas.Manage.ViewModels
 {
-    public class BlogImageVM
+    public class BlogImageVM : BaseAuditableEntityVM
     {
-        public int Id { get; set; }
         public string? ImgUrl { get; set; }
         public string BlogId { get; set; }
         public IFormFile? ImageFile { get; set; }

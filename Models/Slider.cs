@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace ProniaWebApp.Models
 {
     public class Slider : BaseAuditableEntity

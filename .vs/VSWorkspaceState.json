@@ -3,8 +3,11 @@
     "",
     "\\Areas",
     "\\Areas\\Manage",
-    "\\Areas\\Manage\\Controllers"
+    "\\Areas\\Manage\\Controllers",
+    "\\Areas\\Manage\\Views",
+    "\\Areas\\Manage\\Views\\Category",
+    "\\Areas\\Manage\\Views\\Tag"
   ],
-  "SelectedNode": "\\Areas\\Manage\\Controllers\\ProductImageController.cs",
+  "SelectedNode": "\\ProniaWebApp.sln",
   "PreviewInSolutionExplorer": false
 }

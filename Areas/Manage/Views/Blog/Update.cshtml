@@ -22,6 +22,15 @@
                 <span asp-validation-for="CategoryId"></span>
             </div>
         </div>
+        <div class="col-md-6 mt-4">
+            <label asp-for="TagIds" class="form-label">Tags</label>
+            <br />
+            <select asp-for="TagIds" asp-items="new SelectList(Model.Tags, nameof(Tag.Id), nameof(Tag.Name))" class="form-select mx-3">
+            </select>
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="TagIds"></span>
+            </div>
+        </div>
         <div class="col-12" style="margin-left: -10px;">
             <div class="col-md-6">
                 <label asp-for="Description" class="form-label">Description</label>
