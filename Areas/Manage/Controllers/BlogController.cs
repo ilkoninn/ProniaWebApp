@@ -74,7 +74,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 Description = blogVM.Description,
                 CategoryId = int.Parse(blogVM.CategoryId),
                 CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
 
             _db.Blogs.Add(newBlog);
@@ -140,7 +140,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldBlog.Title = blogVM.Title;
             oldBlog.Description = blogVM.Description;
             oldBlog.CategoryId = int.Parse(blogVM.CategoryId);
-            oldBlog.LastUpdatedDate = DateTime.Now;
+            oldBlog.UpdatedDate = DateTime.Now;
             oldBlog.CreatedDate = oldBlog.CreatedDate;
             await _db.SaveChangesAsync();
 

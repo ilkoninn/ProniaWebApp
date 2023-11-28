@@ -85,7 +85,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 Description = sliderVM.Description,
                 ImgUrl = sliderVM.ImageFile.Upload(_env.WebRootPath, @"\Upload\SliderImages\"),
                 CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
 
             _db.Sliders.Add(newSlider);
@@ -167,7 +167,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldSlider.Title = sliderVM.Title;
             oldSlider.SubTitle = sliderVM.SubTitle;
             oldSlider.Description = sliderVM.Description;
-            oldSlider.LastUpdatedDate = DateTime.Now;
+            oldSlider.UpdatedDate = DateTime.Now;
             oldSlider.CreatedDate = oldSlider.CreatedDate;
 
             await _db.SaveChangesAsync();

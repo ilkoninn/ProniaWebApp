@@ -1,15 +1,14 @@
-﻿namespace ProniaWebApp.Models
+﻿using Microsoft.IdentityModel.Tokens;
+
+namespace ProniaWebApp.Models
 {
-    public class Blog
+    public class Blog : BaseAuditableEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<Tag>? Tag { get; set; }
         public ICollection<BlogImage>? BlogImage { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
     }
 }

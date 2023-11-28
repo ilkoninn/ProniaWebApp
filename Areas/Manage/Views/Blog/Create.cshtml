@@ -15,12 +15,8 @@
         </div>
         <div class="col-md-6 mt-4">
             <label asp-for="CategoryId" class="form-label">Category</label>
-            <select asp-for="CategoryId" class="form-select mx-3">
+            <select asp-for="CategoryId" asp-items="new SelectList(Model.Categories, nameof(Category.Id), nameof(Category.Name))" class="form-select mx-3">
                 <option value="null">Choose Category</option>
-                @foreach (var category in Model.Categories)
-                {
-                    <option value="@category.Id">@category.Name</option>
-                }
             </select>
             <div style="color: red; margin-top: 10px; margin-left: 10px;">
                 <span asp-validation-for="CategoryId"></span>

@@ -55,9 +55,9 @@
                                     @item.CreatedDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
-                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    @item.UpdatedDate.ToString("HH:mm")
                                     <br />
-                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                    @item.UpdatedDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
                                     <a asp-controller="BlogImage" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>

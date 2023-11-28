@@ -1,20 +1,24 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\18e3ca6a-b049-414a-9535-299fe53dcd66Screenshot 2023-07-24 144956.png",
-      "PackagePath": "staticwebassets\\Upload\\ProductImages\\18e3ca6a-b049-414a-9535-299fe53dcd66Screenshot 2023-07-24 144956.png"
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\BlogImages\\5ceb8235-3902-42b5-85a1-3a158ec53f4cScreenshot 2023-06-27 152119.png",
+      "PackagePath": "staticwebassets\\Upload\\BlogImages\\5ceb8235-3902-42b5-85a1-3a158ec53f4cScreenshot 2023-06-27 152119.png"
     },
     {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\3a61e4dd-63fc-4a36-97d9-12a3ba1efcc2Screenshot 2023-07-24 144322.png",
       "PackagePath": "staticwebassets\\Upload\\ProductImages\\3a61e4dd-63fc-4a36-97d9-12a3ba1efcc2Screenshot 2023-07-24 144322.png"
     },
     {
-      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\b11c9719-8f85-4645-ab40-80f104e8dbeaScreenshot 2023-07-24 154730.png",
-      "PackagePath": "staticwebassets\\Upload\\ProductImages\\b11c9719-8f85-4645-ab40-80f104e8dbeaScreenshot 2023-07-24 154730.png"
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\6397591e-84af-4a49-be62-d00b072f3373Screenshot 2023-06-16 154539.png",
+      "PackagePath": "staticwebassets\\Upload\\ProductImages\\6397591e-84af-4a49-be62-d00b072f3373Screenshot 2023-06-16 154539.png"
     },
     {
-      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\82da9896-b25b-4259-873c-ded98bcb04aaScreenshot 2023-11-12 190800.png",
-      "PackagePath": "staticwebassets\\Upload\\SliderImages\\82da9896-b25b-4259-873c-ded98bcb04aaScreenshot 2023-11-12 190800.png"
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\644f62a1-4b2a-4b18-a4c3-ea150648058eScreenshot 2023-06-19 214251.png",
+      "PackagePath": "staticwebassets\\Upload\\ProductImages\\644f62a1-4b2a-4b18-a4c3-ea150648058eScreenshot 2023-06-19 214251.png"
+    },
+    {
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\SliderImages\\3444add6-0187-47e9-b89b-e411bf485e12Screenshot 2023-06-27 152119.png",
+      "PackagePath": "staticwebassets\\Upload\\SliderImages\\3444add6-0187-47e9-b89b-e411bf485e12Screenshot 2023-06-27 152119.png"
     },
     {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\css\\Pe-icon-7-stroke.css",

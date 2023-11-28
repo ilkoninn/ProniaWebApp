@@ -115,7 +115,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 ProductId = int.Parse(productImageVM.ProductId),
                 IsPrime = productImageVM.IsPrime,
                 CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
 
             _db.ProductImages.Add(newProductImage);
@@ -220,7 +220,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             oldProductImage.ImgUrl = productImageVM.ImgUrl;
             oldProductImage.ProductId = int.Parse(productImageVM.ProductId);
             oldProductImage.IsPrime = productImageVM.IsPrime;
-            oldProductImage.LastUpdatedDate = DateTime.Now;
+            oldProductImage.UpdatedDate = DateTime.Now;
             oldProductImage.CreatedDate = oldProductImage.CreatedDate;
 
             await _db.SaveChangesAsync();

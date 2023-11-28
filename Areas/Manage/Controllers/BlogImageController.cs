@@ -82,7 +82,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 ImgUrl = blogImageVM.ImgUrl,
                 BlogId = int.Parse(blogImageVM.BlogId),
                 CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
 
             _db.BlogsImages.Add(newBlogImage);
@@ -146,7 +146,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             oldBlogImage.ImgUrl = BlogImageVM.ImgUrl;
             oldBlogImage.BlogId = int.Parse(BlogImageVM.BlogId);
-            oldBlogImage.LastUpdatedDate = DateTime.Now;
+            oldBlogImage.UpdatedDate = DateTime.Now;
             oldBlogImage.CreatedDate = oldBlogImage.CreatedDate;
 
             await _db.SaveChangesAsync();

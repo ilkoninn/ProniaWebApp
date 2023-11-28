@@ -2,15 +2,12 @@
 
 namespace ProniaWebApp.Models
 {
-    public class ProductImage
+    public class ProductImage : BaseAuditableEntity
     {
-        public int Id { get; set; }
         public string ImgUrl { get; set; }
         public bool IsPrime { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
       

@@ -47,7 +47,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             {
                 Name = tagVM.Name,
                 CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
 
             _db.Tags.Add(newTag);
@@ -88,7 +88,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             Tag oldTag = await _db.Tags.FindAsync(tagVM.Id);
             oldTag.Name = tagVM.Name;
-            oldTag.LastUpdatedDate = DateTime.Now;
+            oldTag.UpdatedDate = DateTime.Now;
             oldTag.CreatedDate = oldTag.CreatedDate;
 
             await _db.SaveChangesAsync();

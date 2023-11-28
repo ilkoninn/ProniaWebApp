@@ -53,9 +53,9 @@
                                     @item.CreatedDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
-                                    @item.LastUpdatedDate.ToString("HH:mm")
+                                    @item.UpdatedDate.ToString("HH:mm")
                                     <br/>
-                                    @item.LastUpdatedDate.ToString("dd/MM/yyyy")
+                                    @item.UpdatedDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
                                 <td>
