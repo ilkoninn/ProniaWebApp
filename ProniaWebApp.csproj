@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Manage\Data\**" />
+    <Compile Remove="wwwroot\Upload\SliderImages\**" />
     <Content Remove="Areas\Manage\Data\**" />
+    <Content Remove="wwwroot\Upload\SliderImages\**" />
     <EmbeddedResource Remove="Areas\Manage\Data\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\SliderImages\**" />
     <None Remove="Areas\Manage\Data\**" />
+    <None Remove="wwwroot\Upload\SliderImages\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +29,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\manage\" />
-    <Folder Include="wwwroot\Upload\ProductImages\" />
-    <Folder Include="wwwroot\Upload\SliderImages\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
 </Project>

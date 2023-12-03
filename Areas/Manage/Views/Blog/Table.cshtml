@@ -20,6 +20,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Tags Name</th>
+                            <th>Blog Image</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
@@ -32,6 +33,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Tags Name</th>
+                            <th>Blog Image</th>
                             <th>Created Date</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
@@ -51,13 +53,18 @@
                                 <td>@item.Description</td>
                                 <td>
                                     @{
-                                        count = 0;
+                                        var count2 = 0;
                                     }
                                     @foreach (var tag in item.Tags)
                                     {
-                                        count++;
-                                        @(item.Tags.Count() != count ? tag.Tag.Name + ", " : tag.Tag.Name + "")
+                                        count2++;
+                                        @(item.Tags.Count() != count2 ? tag.Tag.Name + ", " : tag.Tag.Name + "")
                                     }
+                                </td>
+                                <td>
+                                    <div style="width:100px">
+                                        <img width="100%" src="~/Upload/BlogImages/@item.BlogImage.FirstOrDefault(x => x.IsMain == true).ImgUrl">
+                                    </div>
                                 </td>
                                 <td>
                                     @item.CreatedDate.ToString("HH:mm")

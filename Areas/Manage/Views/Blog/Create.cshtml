@@ -1,11 +1,11 @@
-﻿@model BlogVM
+﻿@model CreateBlogVM
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Create Blog</h1>
-    <form method="post" class="row g-3">
+    <form method="post" class="row g-3" enctype="multipart/form-data">
         <div class="col-md-6">
             <label asp-for="Title" class="form-label">Blog Title</label>
             <input asp-for="Title" type="text" class="form-control">
@@ -38,6 +38,18 @@
                 <div style="color: red; margin-top: 10px; margin-left: 10px;">
                     <span asp-validation-for="Description"></span>
                 </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="mb-3 col-md-4">
+                <label asp-for="MainImage" class="form-label">Main Image</label>
+                <input class="form-control" asp-for="MainImage">
+                <span asp-validation-for="MainImage" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-4">
+                <label asp-for="Images" class="form-label">Additional Images</label>
+                <input class="form-control" asp-for="Images">
+                <span asp-validation-for="Images" style="color:red"></span>
             </div>
         </div>
         <div class="col-12 mt-3 mx-3">

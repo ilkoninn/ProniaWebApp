@@ -6,8 +6,9 @@
     "\\Areas\\Manage\\Controllers",
     "\\Areas\\Manage\\Views",
     "\\Areas\\Manage\\Views\\Category",
-    "\\Areas\\Manage\\Views\\Tag"
+    "\\Areas\\Manage\\Views\\Tag",
+    "\\DAL"
   ],
-  "SelectedNode": "\\ProniaWebApp.sln",
+  "SelectedNode": "\\DAL\\AppDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -9,10 +9,18 @@ namespace ProniaWebApp.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             HomeVM vm = new HomeVM(); 
-            vm.sliders = _context.Sliders.ToList();
+            vm.sliders = await _context.Sliders
+                .ToListAsync();
+            vm.products = await _context.Products
+                .Include(x => x.ProductImage)
+                .ToListAsync();
+            vm.blogs = await _context.Blogs
+                .Include(x => x.BlogImage)
+                .ToListAsync();
+            
             return View(vm);
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace ProniaWebApp.Models
 {
-    public class TagVM : BaseAuditableEntityVM
+    public class TagVM : BaseAuditableEntityAdminVM
     {
         public string Name { get; set; }
     }

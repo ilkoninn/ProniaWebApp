@@ -72,6 +72,9 @@ namespace ProniaWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -188,7 +191,7 @@ namespace ProniaWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsPrime")
+                    b.Property<bool?>("IsPrime")
                         .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
@@ -215,7 +218,7 @@ namespace ProniaWebApp.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("TagId")
@@ -358,9 +361,7 @@ namespace ProniaWebApp.Migrations
                 {
                     b.HasOne("ProniaWebApp.Models.Product", "Product")
                         .WithMany("Tags")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("ProniaWebApp.Models.Tag", "Tag")
                         .WithMany("Products")

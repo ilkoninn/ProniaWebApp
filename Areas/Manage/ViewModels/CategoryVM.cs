@@ -1,6 +1,6 @@
 ﻿namespace ProniaWebApp.Models
 {
-    public class CategoryVM : BaseAuditableEntityVM
+    public class CategoryVM : BaseAuditableEntityAdminVM
     {
         public string Name { get; set; }
     }

@@ -1,11 +1,11 @@
-﻿@model ProductVM
+﻿@model UpdateProductVM
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Create Product</h1>
-    <form method="post" class="row g-3">
+    <form method="post" class="row g-3" enctype="multipart/form-data">
         <div class="col-md-6">
             <label asp-for="Title" class="form-label">Product Title</label>
             <input asp-for="Title" type="text" class="form-control">
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-6">
             <label asp-for="Price" class="form-label">Product Price</label>
-            <input asp-for="Price" type="number" class="form-control">
+            <input asp-for="Price" type="number" min="0" max="10" step="0.25" class="form-control">
         </div>
         <div class="col-md-6">
             <label asp-for="SKU" class="form-label">Product SKU(Code)</label>
@@ -34,28 +34,74 @@
             </div>
         </div>
         <div class="col-md-6 mt-4">
-            <label asp-for="TagIds" class="form-label">Category</label>
+            <label asp-for="TagIds" class="form-label">Tags</label>
             <br />
             <select asp-for="TagIds" asp-items="new SelectList(Model.Tags, nameof(Tag.Id), nameof(Tag.Name))" class="form-select mx-3">
             </select>
             <div style="color: red; margin-top: 10px; margin-left: 10px;">
                 <span asp-validation-for="TagIds"></span>
             </div>
+            
         </div>
-        <div class="col-12" style="margin-left: -10px;">
-            <div class="col-md-6">
-                <label asp-for="Description" class="form-label">Description</label>
-                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+        <div class="col-md-6">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="Description"></span>
+            </div>
+        </div>
+        <div class="row align-items-center mt-4 mx-4">
+            <div class="mb-3 col-md-4">
+                <img class="mb-3" style="width: 100%; height: 300px; border-radius: 5px;" src="~/Upload/ProductImages/@Model.ProductImagesVM.FirstOrDefault(x => x.IsPrime == true).ImgUrl" />
+                <label asp-for="MainImage" class="form-label">Main Image</label>
+                <input class="form-control" asp-for="MainImage">
                 <div style="color: red; margin-top: 10px; margin-left: 10px;">
-                    <span asp-validation-for="Description"></span>
+                    <span asp-validation-for="MainImage"></span>
+                </div>
+            </div>
+            <div class="mb-3 col-md-4">
+                <img class="mb-3" style="width: 100%; height: 300px; border-radius: 5px;" src="~/Upload/ProductImages/@Model.ProductImagesVM.FirstOrDefault(x => x.IsPrime == false).ImgUrl" />
+                <label asp-for="HoverImage" class="form-label">Hover Image</label>
+                <input class="form-control" asp-for="HoverImage">
+                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                    <span asp-validation-for="HoverImage"></span>
                 </div>
             </div>
         </div>
         <div class="col-12 mt-3 mx-3">
+            <label asp-for="Images" class="form-label">Additional Images</label>
+            <div class="row align-items-start">
+                @foreach (var item in Model.ProductImagesVM.Where(p => p.IsPrime == null).ToList())
+                {
+                    <div class="col-2 mb-3 position-relative">
+                        <button type="button" class="btn btn-danger custom-delete position-absolute top-0 start-0">X</button>
+                        <img style="width: 100%; height: 200px; border-radius: 5px;" src="~/Upload/ProductImages/@item.ImgUrl" />
+                        <input type="hidden" value="@item.Id" name="ImageIds" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6 mx-3">
+            <input class="form-control" asp-for="Images">
+            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                <span asp-validation-for="Images"></span>
+            </div>
+        </div>
+
+
+        <div class="col-12 mt-3 mx-4">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button asp-controller="Product" asp-action="Table" type="submit" class="btn btn-secondary">Cancel</button>
         </div>
     </form>
 
 </div>
+<script>
+    let btn = document.querySelectorAll(".custom-delete")
+    btn.forEach(b => {
+        b.addEventListener("click", function () {
+            b.parentElement.remove()
+        })
+    })
+</script>
 <!-- /.container-fluid -->

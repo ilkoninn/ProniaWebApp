@@ -1,5 +1,5 @@
 ﻿
-using ProniaWebApp.Areas.Manage.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using ProniaWebApp.Models;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
@@ -8,9 +8,11 @@ namespace ProniaWebApp.Areas.Manage.Controllers
     public class BlogController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly IWebHostEnvironment _env;
         public BlogController(AppDbContext appDb, IWebHostEnvironment env)
         {
             _db = appDb;
+            _env = env;
         }
 
         // <--- Table Section --->
@@ -20,6 +22,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             adminVM.blogs = await _db.Blogs
                 .Include(x => x.Tags)
                 .ThenInclude(x => x.Tag)
+                .Include(x => x.BlogImage)
                 .ToListAsync();
             adminVM.categories = await _db.Categories.ToListAsync();
 
@@ -33,22 +36,23 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             ICollection<Category> categories = await _db.Categories.ToListAsync();
             ICollection<Tag> tags = await _db.Tags.ToListAsync();
-            BlogVM BlogVM = new BlogVM
+
+            CreateBlogVM BlogVM = new CreateBlogVM
             {
                 Categories = categories,
                 Tags = tags,
+                TagIds = new List<int> { }
             };
             return View(BlogVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BlogVM blogVM)
+        public async Task<IActionResult> Create(CreateBlogVM BlogVM)
         {
-            var existsTitle = await _db.Blogs.FirstOrDefaultAsync(x => x.Title == blogVM.Title) != null;
-            var existsDescription = await _db.Blogs.FirstOrDefaultAsync(x => x.Description == blogVM.Description) != null;
+            var existsTitle = await _db.Blogs.FirstOrDefaultAsync(x => x.Title == BlogVM.Title) != null;
+            var existsDescription = await _db.Blogs.FirstOrDefaultAsync(x => x.Description == BlogVM.Description) != null;
 
-
-            if (blogVM.CategoryId == "null")
+            if (BlogVM.CategoryId == "null")
             {
                 ModelState.AddModelError("CategoryId", "Please, choose a category for your Blog!");
             }
@@ -61,46 +65,109 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 ModelState.AddModelError("Description", "There is a same description Blog in Table!");
             }
 
-            if (ModelState.ErrorCount > 0)
-            {
-                blogVM.Categories = await _db.Categories.ToListAsync();
-                return View(blogVM);
-            }
-
             if (!ModelState.IsValid)
             {
-                blogVM.Categories = await _db.Categories.ToListAsync();
-                return View(blogVM);
+                BlogVM.Categories = await _db.Categories.ToListAsync();
+                BlogVM.Tags = await _db.Tags.ToListAsync();
+                return View(BlogVM);
             }
+
 
             Blog newBlog = new Blog
             {
-                Title = blogVM.Title,
-                Description = blogVM.Description,
-                CategoryId = int.Parse(blogVM.CategoryId),
+                Title = BlogVM.Title,
+                Description = BlogVM.Description,
+                CategoryId = int.Parse(BlogVM.CategoryId),
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
+                BlogImage = new List<BlogImage>(),
             };
 
-            if (blogVM.TagIds != null)
+            // Main Image Section
+            if (BlogVM.MainImage != null)
             {
-                foreach (var item in blogVM.TagIds)
+                if (!BlogVM.MainImage.CheckType("image/"))
+                {
+                    ModelState.AddModelError("ImageFile", "You can upload only images");
+                }
+                if (!BlogVM.MainImage.CheckLength(2097152))
+                {
+                    ModelState.AddModelError("ImageFile", "The maximum size of image is 2MB!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    BlogVM.Categories = await _db.Categories.ToListAsync();
+                    BlogVM.Tags = await _db.Tags.ToListAsync();
+                    return View(BlogVM);
+                }
+
+                BlogImage BlogImage = new BlogImage
+                {
+                    IsMain = true,
+                    Blog = newBlog,
+                    ImgUrl = BlogVM.MainImage.Upload(_env.WebRootPath, @"\Upload\BlogImages\")
+                };
+
+                newBlog.BlogImage.Add(BlogImage);
+            }
+            else
+            {
+                ModelState.AddModelError("MainImage", "You must be upload a main image!");
+                BlogVM.Categories = await _db.Categories.ToListAsync();
+                BlogVM.Tags = await _db.Tags.ToListAsync();
+                return View(BlogVM);
+            }
+
+            // Additional Images Sectionz`
+            if (BlogVM.Images != null)
+            {
+                foreach (var item in BlogVM.Images)
+                {
+                    if (!item.CheckType("image/"))
+                    {
+                        TempData["Error"] += $"{item.FileName} is not image type!\n";
+                        continue;
+                    }
+                    if (!item.CheckLength(2097152))
+                    {
+                        TempData["Error"] += $"{item.FileName} size is must lower than 2MB!";
+                        continue;
+                    }
+
+                    BlogImage BlogImage = new BlogImage
+                    {
+                        IsMain = false,
+                        Blog = newBlog,
+                        ImgUrl = item.Upload(_env.WebRootPath, @"\Upload\BlogImages\")
+                    };
+
+                    newBlog.BlogImage.Add(BlogImage);
+                }
+            }
+
+            // Blog Tag Section
+            if (BlogVM.TagIds != null)
+            {
+                foreach (var item in BlogVM.TagIds)
                 {
                     bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
 
                     if (!existsTag)
                     {
                         ModelState.AddModelError("TagIds", "There is no tag like this!");
-                        return View(blogVM);
+                        BlogVM.Categories = await _db.Categories.ToListAsync();
+                        BlogVM.Tags = await _db.Tags.ToListAsync();
+                        return View(BlogVM);
                     }
 
-                    BlogTag blogTag = new BlogTag()
+                    BlogTag BlogTag = new BlogTag()
                     {
                         Blog = newBlog,
                         TagId = item,
                     };
 
-                    _db.BlogTags.Add(blogTag);
+                    _db.BlogTags.Add(BlogTag);
                 }
             }
 
@@ -110,20 +177,21 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             return RedirectToAction("Table");
         }
 
+
         // <--- Update Section --->
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-
             Blog oldBlog = await _db.Blogs
                 .Include(x => x.Tags)
                 .ThenInclude(pt => pt.Tag)
-                .Where(c => c.Id == Id) 
-                .FirstOrDefaultAsync(); ;
-            if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome"); 
+                .Include(x => x.BlogImage)
+                .Where(c => c.Id == Id)
+                .FirstOrDefaultAsync();
 
+            if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
-            BlogVM blogVM = new BlogVM
+            UpdateBlogVM updateBlogVM = new UpdateBlogVM
             {
                 Title = oldBlog.Title,
                 Description = oldBlog.Description,
@@ -131,29 +199,38 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 Categories = await _db.Categories.ToListAsync(),
                 Tags = await _db.Tags.ToListAsync(),
                 TagIds = oldBlog.Tags.Select(pt => pt.TagId).ToList(),
+                BlogImagesVM = new List<BlogImageVM>(),
             };
 
-            return View(blogVM);
+            foreach (var item in oldBlog.BlogImage)
+            {
+                BlogImageVM BlogImageVM = new BlogImageVM()
+                {
+                    Id = item.Id,
+                    ImgUrl = item.ImgUrl,
+                    IsMain = item.IsMain,
+                };
+                updateBlogVM.BlogImagesVM.Add(BlogImageVM);
+            }
+
+            return View(updateBlogVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(BlogVM blogVM)
+        public async Task<IActionResult> Update(UpdateBlogVM updateBlogVM)
         {
             Blog oldBlog = await _db.Blogs
                 .Include(x => x.Tags)
-                .FirstOrDefaultAsync(x => x.Id == blogVM.Id);
-
+                .ThenInclude(pt => pt.Tag)
+                .Include(x => x.BlogImage)
+                .FirstOrDefaultAsync(x => x.Id == updateBlogVM.Id);
             if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
-            var existsTitle = await _db.Blogs
-                .Where(Blog => Blog.Title == blogVM.Title && Blog.Id != blogVM.Id)
-                .FirstOrDefaultAsync() != null;
-            var existsDescription = await _db.Blogs
-                .Where(Blog => Blog.Description == blogVM.Description && Blog.Id != blogVM.Id)
-                .FirstOrDefaultAsync() != null;
+            var existsTitle = await _db.Blogs.Where(Blog => Blog.Title == updateBlogVM.Title && Blog.Id != updateBlogVM.Id).FirstOrDefaultAsync() != null;
+            var existsDescription = await _db.Blogs.Where(Blog => Blog.Description == updateBlogVM.Description && Blog.Id != updateBlogVM.Id).FirstOrDefaultAsync() != null;
 
 
-            if (blogVM.CategoryId == "null")
+            if (updateBlogVM.CategoryId == "null")
             {
                 ModelState.AddModelError("CategoryId", "Please, choose a category for your Blog!");
             }
@@ -166,46 +243,120 @@ namespace ProniaWebApp.Areas.Manage.Controllers
                 ModelState.AddModelError("Description", "There is a same description Blog in Table!");
             }
 
-            if (ModelState.ErrorCount > 0)
-            {
-                blogVM.Categories = await _db.Categories.ToListAsync();
-                return View(blogVM);
-            }
-
             if (!ModelState.IsValid)
             {
-                blogVM.Categories = await _db.Categories.ToListAsync();
-                return View(blogVM);
+                return View(updateBlogVM);
             }
 
-            oldBlog.Title = blogVM.Title;
-            oldBlog.Description = blogVM.Description;
-            oldBlog.CategoryId = int.Parse(blogVM.CategoryId);
+            oldBlog.Title = updateBlogVM.Title;
+            oldBlog.Description = updateBlogVM.Description;
+            oldBlog.CategoryId = int.Parse(updateBlogVM.CategoryId);
             oldBlog.UpdatedDate = DateTime.Now;
             oldBlog.CreatedDate = oldBlog.CreatedDate;
 
             oldBlog.Tags.Clear();
 
-            if (blogVM.TagIds != null)
+            // Blog Tag Section
+            if (updateBlogVM.TagIds != null)
             {
 
-                foreach (var item in blogVM.TagIds)
+                foreach (var item in updateBlogVM.TagIds)
                 {
                     bool existsTag = await _db.Tags.AnyAsync(c => c.Id == item);
 
                     if (!existsTag)
                     {
                         ModelState.AddModelError("TagIds", "There is no tag like this!");
-                        return View(blogVM);
+                        updateBlogVM.Categories = await _db.Categories.ToListAsync();
+                        updateBlogVM.Tags = await _db.Tags.ToListAsync();
+                        return View(updateBlogVM);
                     }
 
-                    BlogTag blogTag = new BlogTag()
+                    BlogTag BlogTag = new BlogTag()
                     {
-                        Blog = oldBlog,
                         TagId = item,
                     };
 
-                    _db.BlogTags.Add(blogTag);
+                    oldBlog.Tags.Add(BlogTag);
+                }
+            }
+
+            // Main Image Section
+            if (updateBlogVM.MainImage != null)
+            {
+                if (!updateBlogVM.MainImage.CheckType("image/"))
+                {
+                    ModelState.AddModelError("ImageFile", "You can upload only images");
+                }
+                if (!updateBlogVM.MainImage.CheckLength(2097152))
+                {
+                    ModelState.AddModelError("ImageFile", "The maximum size of image is 2MB!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    updateBlogVM.Categories = await _db.Categories.ToListAsync();
+                    updateBlogVM.Tags = await _db.Tags.ToListAsync();
+                    return View(updateBlogVM);
+                }
+
+                var existMainPhoto = oldBlog.BlogImage.FirstOrDefault(p => p.IsMain == true);
+                existMainPhoto.ImgUrl.Delete(_env.WebRootPath, @"\Upload\BlogImages\");
+                oldBlog.BlogImage.Remove(existMainPhoto);
+
+                BlogImage BlogImage = new BlogImage
+                {
+                    IsMain = true,
+                    Blog = oldBlog,
+                    ImgUrl = updateBlogVM.MainImage.Upload(_env.WebRootPath, @"\Upload\BlogImages\")
+                };
+
+                oldBlog.BlogImage.Add(BlogImage);
+            }
+
+
+            if (updateBlogVM.ImageIds == null)
+            {
+                oldBlog.BlogImage.RemoveAll(x => x.IsMain == false);
+            }
+            else
+            {
+                List<BlogImage> removeList = oldBlog.BlogImage.Where(pt => !updateBlogVM.ImageIds.Contains(pt.Id) && pt.IsMain == null).ToList();
+
+                if (removeList.Count > 0)
+                {
+                    foreach (var item in removeList)
+                    {
+                        oldBlog.BlogImage.Remove(item);
+                        item.ImgUrl.Delete(_env.WebRootPath, @"\Upload\BlogImages\");
+                    }
+                }
+            }
+
+            // Additional Image Section
+            TempData["Error"] = "";
+            if (updateBlogVM.Images != null)
+            {
+                foreach (IFormFile imgFile in updateBlogVM.Images)
+                {
+                    if (!imgFile.CheckType("image/"))
+                    {
+                        TempData["Error"] += $"{imgFile.FileName} is not image type!\n";
+                        continue;
+                    }
+                    if (!imgFile.CheckLength(2097152))
+                    {
+                        TempData["Error"] += $"{imgFile.FileName} size is must lower than 2MB!";
+                        continue;
+                    }
+
+                    BlogImage BlogImages = new BlogImage()
+                    {
+                        IsMain = false,
+                        BlogId = oldBlog.Id,
+                        ImgUrl = imgFile.Upload(_env.WebRootPath, "/Upload/BlogImages/")
+                    };
+                    oldBlog.BlogImage.Add(BlogImages);
                 }
             }
 
@@ -217,10 +368,28 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         // <--- Delete Section --->
         public async Task<IActionResult> Delete(int Id)
         {
-            Blog Blog = await _db.Blogs.FirstOrDefaultAsync(x => x.Id == Id);
-            if (Blog == null) return RedirectToAction("NotFound", "AdminHome");
+            Blog oldBlog = await _db.Blogs
+                .Include(x => x.Tags)
+                .ThenInclude(x => x.Tag)
+                .Include(x => x.BlogImage)
+                .FirstOrDefaultAsync(x => x.Id == Id);
 
-            _db.Blogs.Remove(Blog);
+            if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
+
+
+            foreach (var tag in oldBlog.Tags)
+            {
+                _db.Remove(tag);
+            }
+
+            _db.BlogsImages.RemoveRange(oldBlog.BlogImage);
+            _db.Blogs.Remove(oldBlog);
+
+            foreach (var item in oldBlog.BlogImage)
+            {
+                item.ImgUrl.Delete(_env.WebRootPath, @"\Upload\BlogImages\");
+            }
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Table");

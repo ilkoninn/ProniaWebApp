@@ -8,6 +8,7 @@
         <h1 class="h3 mb-2 text-gray-800">Product Table</h1>
         <a asp-controller="Product" asp-action="Create" class="btn btn-primary">Create</a>
     </div>
+    <span style='color:red'>@TempData["Error"]</span>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4 mt-5">
@@ -23,6 +24,7 @@
                             <th>SKU(Code)</th>
                             <th>Created Date</th>
                             <th>Tags Name</th>
+                            <th>Product Image</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
                             <th>Change Section</th>
@@ -37,6 +39,7 @@
                             <th>SKU(Code)</th>
                             <th>Created Date</th>
                             <th>Tags Name</th>
+                            <th>Product Image</th>
                             <th>Last Updated Date</th>
                             <th>Category Name</th>
                             <th>Change Section</th>
@@ -65,6 +68,11 @@
                                         count++;
                                         @(item.Tags.Count() != count ? tag.Tag.Name + ", ": tag.Tag.Name + "")
                                     }
+                                </td>
+                                <td>
+                                    <div style="width:100px">
+                                        <img width="100%" src="~/Upload/ProductImages/@item.ProductImage.FirstOrDefault(x => x.IsPrime == true).ImgUrl">
+                                    </div>
                                 </td>
                                 <td>
                                     @item.CreatedDate.ToString("HH:mm")

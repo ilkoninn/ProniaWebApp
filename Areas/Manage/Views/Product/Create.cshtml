@@ -1,11 +1,11 @@
-﻿@model ProductVM
+﻿@model CreateProductVM
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Create Product</h1>
-    <form method="post" class="row g-3">
+    <form method="post" class="row g-3" enctype="multipart/form-data">
         <div class="col-md-6">
             <label asp-for="Title" class="form-label">Product Title</label>
             <input asp-for="Title" type="text" class="form-control">
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-6">
             <label asp-for="Price" class="form-label">Product Price</label>
-            <input asp-for="Price" type="number" min="0" max="10" step="0.25" class="form-control">
+            <input asp-for="Price" type="number" class="form-control">
         </div>
         <div class="col-md-6">
             <label asp-for="SKU" class="form-label">Product SKU(Code)</label>
@@ -51,6 +51,23 @@
                 </div>
             </div>
         </div>
+        <div class="row align-items-center">
+            <div class="mb-3 col-md-4">
+                <label asp-for="MainImage" class="form-label">Main Image</label>
+                <input class="form-control" asp-for="MainImage">
+                <span asp-validation-for="MainImage" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-4">
+                <label asp-for="HoverImage" class="form-label">Hover Image</label>
+                <input class="form-control" asp-for="HoverImage">
+                <span asp-validation-for="HoverImage" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-4">
+                <label asp-for="Images" class="form-label">Additional Images</label>
+                <input class="form-control" asp-for="Images">
+                <span asp-validation-for="Images" style="color:red"></span>
+            </div>
+        </div>
         <div class="col-12 mt-3 mx-3">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button asp-controller="Product" asp-action="Table" type="submit" class="btn btn-secondary">Cancel</button>
@@ -58,5 +75,4 @@
     </form>
 
 </div>
-
 <!-- /.container-fluid -->
