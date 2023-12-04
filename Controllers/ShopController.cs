@@ -33,10 +33,49 @@ namespace ProniaWebApp.Controllers
             return View(vm);
         }
 
-        public IActionResult Single(int Id)
+        public async Task<IActionResult> Single(int Id)
         {
+            Product singleProduct = await _db.Products
+                .Include(x => x.Category)
+                .Include(x => x.Tags)
+                .ThenInclude(pt => pt.Tag)
+                .Include(x => x.ProductImage)
+                .Where(c => c.Id == Id)
+                .FirstOrDefaultAsync();
 
-            return View();
+            if (singleProduct == null) return RedirectToAction("NotFound", "AdminHome");
+
+            ShopVM shopVM = new ShopVM
+            {
+                Title = singleProduct.Title,
+                Description = singleProduct.Description,
+                Category = singleProduct.Category,
+                Price = singleProduct.Price,
+                SKU = singleProduct.SKU,
+                tags = await _db.Tags
+                .Include(x => x.Products)
+                .ToListAsync(),
+                products = await _db.Products
+                .Include(x => x.ProductImage)
+                .ToListAsync(),
+                Tags = singleProduct.Tags.Select(x => x.Tag).ToList(),
+                CreatedDate = singleProduct.CreatedDate,
+                UpdatedDate = singleProduct.UpdatedDate,
+                Images = new List<ProductImage>()
+            };
+
+            foreach (var item in singleProduct.ProductImage)
+            {
+                ProductImage blogImage = new ProductImage()
+                {
+                    ProductId = item.ProductId,
+                    ImgUrl = item.ImgUrl,
+                    IsPrime = item.IsPrime,
+                };
+                shopVM.Images.Add(blogImage);
+            }
+
+            return View(shopVM);
         }
     }
 }

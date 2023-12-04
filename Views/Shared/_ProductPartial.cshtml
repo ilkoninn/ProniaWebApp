@@ -5,7 +5,7 @@
     <div class="col-md-3 col-sm-3">
         <div class="product-item">
             <div class="product-img">
-                <a asp-controller="Shop" asp-action="SingleProduct" asp-route-id="@item.Id">
+                <a asp-controller="Shop" asp-action="Single" asp-route-id="@item.Id">
                     <img class="primary-img"
                          src="~/Upload/ProductImages/@item.ProductImage.FirstOrDefault(x => x.IsPrime == true).ImgUrl"
                          alt="Product Images" />
@@ -55,7 +55,7 @@
             </div>
             <div class="product-content">
                 <a class="product-name"
-                   asp-controller="Shop" asp-action="SingleProduct" asp-route-id="@item.Id">@item.Title</a>
+                   asp-controller="Shop" asp-action="Single" asp-route-id="@item.Id">@item.Title</a>
                 <div class="price-box pb-1">
                     <span class="new-price">$@item.Price</span>
                 </div>
