@@ -12,6 +12,7 @@
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<Product> products = await _db.Products
+                .Include(x => x.Category)
                 .Include(x => x.ProductImage)
                 .ToListAsync();
                 

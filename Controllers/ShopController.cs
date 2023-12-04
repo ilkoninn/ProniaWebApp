@@ -47,6 +47,7 @@ namespace ProniaWebApp.Controllers
 
             ShopVM shopVM = new ShopVM
             {
+                Id = singleProduct.Id,
                 Title = singleProduct.Title,
                 Description = singleProduct.Description,
                 Category = singleProduct.Category,
@@ -56,6 +57,7 @@ namespace ProniaWebApp.Controllers
                 .Include(x => x.Products)
                 .ToListAsync(),
                 products = await _db.Products
+                .Include(x => x.Category)
                 .Include(x => x.ProductImage)
                 .ToListAsync(),
                 Tags = singleProduct.Tags.Select(x => x.Tag).ToList(),
