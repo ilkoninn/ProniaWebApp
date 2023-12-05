@@ -13,7 +13,7 @@
                         <h2 class="breadcrumb-heading">Cart Page</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>Cart Page</li>
                         </ul>
@@ -40,51 +40,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        @(TotalPrice += item.TotalPrice)
-                                        <tr>
-                                            <td class="product_remove">
-                                                <a href="#">
-                                                    <i class="pe-7s-close"
-                                                       data-tippy="Remove"
-                                                       data-tippy-inertia="true"
-                                                       data-tippy-animation="shift-away"
-                                                       data-tippy-delay="50"
-                                                       data-tippy-arrow="true"
-                                                       data-tippy-theme="sharpborder"></i>
-                                                </a>
-                                            </td>
-                                            <td class="product-thumbnail">
-                                                <a href="#">
-                                                    <img src="~/Upload/ProductImages/@item.ImgUrl"
-                                                         alt="Cart Thumbnail" />
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="#">@item.Title</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="amount">$@item.Price</span>
-                                            </td>
-                                            <td class="quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box"
-                                                           value="@item.Count"
-                                                           type="text" />
-                                                    <div class="dec qtybutton">
-                                                        <i class="fa fa-minus"></i>
-                                                    </div>
-                                                    <div class="inc qtybutton">
-                                                        <i class="fa fa-plus"></i>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$@item.TotalPrice</span>
-                                            </td>
-                                        </tr>
-                                    }
+                                    @await Html.PartialAsync("_BasketPartial", Model)
                                 </tbody>
                             </table>
                         </div>
