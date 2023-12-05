@@ -1,8 +1,8 @@
 ﻿@model List<BasketItemVM>
 
-    @{
-        decimal TotalPrice = 0;
-    }
+@{
+    decimal TotalPrice = 0;
+}
 
 <div class="offcanvas-minicart_wrapper" id="miniCart">
     <div class="offcanvas-body">
@@ -22,7 +22,9 @@
             <ul class="minicart-list">
                 @foreach (var item in Model)
                 {
-                    @(TotalPrice += item.TotalPrice)
+                    
+                        TotalPrice += item.TotalPrice;
+                    
                     <li class="minicart-product">
                         <a class="product-item_remove" href="#">
                             <i class="pe-7s-close"
@@ -49,7 +51,7 @@
             </ul>
         </div>
         <div class="minicart-item_total">
-            <span>Subtotal</span>
+            <span>Total</span>
             <span class="ammount">$@TotalPrice</span>
         </div>
         <div class="group-btn_wrap d-grid gap-2">
