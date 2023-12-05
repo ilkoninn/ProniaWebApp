@@ -1,7 +1,8 @@
 ﻿namespace ProniaWebApp.ViewModels
 {
-    public class BasketCookieItemVM : BaseAuditableEntityVM
+    public class BasketCookieItemVM
     {
+        public int Id { get; set; }
         public int Count { get; set; }
     }
 }

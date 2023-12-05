@@ -18,35 +18,47 @@ namespace ProniaWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var cookieItems = Request.Cookies["Basket"];
-            var products = await _db.Products.ToListAsync();
+            var products = await _db.Products
+                .Include(x => x.ProductImage)
+                .ToListAsync();
 
             if(cookieItems == null && products == null) return NotFound();
 
-            List<BasketItemVM> basketItems = new(); 
-            List<BasketCookieItemVM> basketCookies = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(cookieItems);
+            List<BasketItemVM> basketItems = new List<BasketItemVM>();
 
-            foreach (var product in products)
+            if (cookieItems != null)
             {
-                foreach (var cookie in basketCookies)
-                {
-                    if (cookie.Id == product.Id)
-                    {
-                        BasketItemVM itemVM = new()
-                        {
-                            Id = product.Id,
-                            ImgUrl = product.ProductImage.FirstOrDefault(x => x.IsPrime == true).ImgUrl,
-                            Price = product.Price,
-                            TotalPrice = product.Price * cookie.Count,
-                            Title = product.Title,
-                            Count = cookie.Count,
-                        };
+                List<BasketCookieItemVM> basketCookies = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(cookieItems);
 
-                        basketItems.Add(itemVM);
+                foreach (var product in products)
+                {
+                    foreach (var cookie in basketCookies)
+                    {
+                        if (cookie.Id == product.Id)
+                        {
+                            BasketItemVM itemVM = new BasketItemVM()
+                            {
+                                Id = product.Id,
+                                ImgUrl = product.ProductImage.FirstOrDefault().ImgUrl,
+                                Price = product.Price,
+                                TotalPrice = product.Price * cookie.Count,
+                                Title = product.Title,
+                                Count = cookie.Count,
+                            };
+
+                            basketItems.Add(itemVM);
+                        }
                     }
                 }
+
+                return View(basketItems);
+            }
+            else
+            {
+                return View(basketItems);
             }
 
-            return View(basketItems);
+            
         }
 
         public async Task<IActionResult> AddItem(int Id)
