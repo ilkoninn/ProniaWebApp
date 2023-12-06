@@ -389,13 +389,6 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
-            foreach (var item in await _db.BlogsImages.ToListAsync())
-            {
-                if(item.BlogId == oldBlog.Id)
-                {
-                    item.IsDeleted = true;
-                }
-            }
             oldBlog.IsDeleted = true;  
 
             await _db.SaveChangesAsync();
