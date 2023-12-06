@@ -8,6 +8,7 @@ namespace ProniaWebApp.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
+        public bool IsDeleted { get; set; }
         public Category Category { get; set; }
         public ICollection<BlogTag>? Tags { get; set; }
         public List<BlogImage>? BlogImage { get; set; }

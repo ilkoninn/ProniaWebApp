@@ -20,6 +20,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             AdminVM adminVM = new AdminVM();
             adminVM.blogs = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(x => x.Tag)
                 .Include(x => x.BlogImage)
@@ -49,8 +50,12 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBlogVM BlogVM)
         {
-            var existsTitle = await _db.Blogs.FirstOrDefaultAsync(x => x.Title == BlogVM.Title) != null;
-            var existsDescription = await _db.Blogs.FirstOrDefaultAsync(x => x.Description == BlogVM.Description) != null;
+            var existsTitle = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
+                .FirstOrDefaultAsync(x => x.Title == BlogVM.Title) != null;
+            var existsDescription = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
+                .FirstOrDefaultAsync(x => x.Description == BlogVM.Description) != null;
 
             if (BlogVM.CategoryId == "null")
             {
@@ -183,6 +188,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             Blog oldBlog = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(pt => pt.Tag)
                 .Include(x => x.BlogImage)
@@ -220,14 +226,21 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Update(UpdateBlogVM updateBlogVM)
         {
             Blog oldBlog = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(pt => pt.Tag)
                 .Include(x => x.BlogImage)
                 .FirstOrDefaultAsync(x => x.Id == updateBlogVM.Id);
             if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
-            var existsTitle = await _db.Blogs.Where(Blog => Blog.Title == updateBlogVM.Title && Blog.Id != updateBlogVM.Id).FirstOrDefaultAsync() != null;
-            var existsDescription = await _db.Blogs.Where(Blog => Blog.Description == updateBlogVM.Description && Blog.Id != updateBlogVM.Id).FirstOrDefaultAsync() != null;
+            var existsTitle = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
+                .Where(Blog => Blog.Title == updateBlogVM.Title && Blog.Id != updateBlogVM.Id)
+                .FirstOrDefaultAsync() != null;
+            var existsDescription = await _db.Blogs
+                .Where(x => x.IsDeleted == false)
+                .Where(Blog => Blog.Description == updateBlogVM.Description && Blog.Id != updateBlogVM.Id)
+                .FirstOrDefaultAsync() != null;
 
 
             if (updateBlogVM.CategoryId == "null")
@@ -376,23 +389,18 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
             if (oldBlog == null) return RedirectToAction("NotFound", "AdminHome");
 
-
-            foreach (var tag in oldBlog.Tags)
+            foreach (var item in await _db.BlogsImages.ToListAsync())
             {
-                _db.Remove(tag);
+                if(item.BlogId == oldBlog.Id)
+                {
+                    item.IsDeleted = true;
+                }
             }
-
-            _db.BlogsImages.RemoveRange(oldBlog.BlogImage);
-            _db.Blogs.Remove(oldBlog);
-
-            foreach (var item in oldBlog.BlogImage)
-            {
-                item.ImgUrl.Delete(_env.WebRootPath, @"\Upload\BlogImages\");
-            }
+            oldBlog.IsDeleted = true;  
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Table");
+            return Ok();
         }
     }
 }

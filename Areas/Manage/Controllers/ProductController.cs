@@ -20,6 +20,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         {
             AdminVM adminVM = new AdminVM();
             adminVM.products = await _db.Products
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(x => x.Tag)
                 .Include(x => x.ProductImage)
@@ -49,9 +50,15 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductVM productVM)
         {
-            var existsTitle = await _db.Products.FirstOrDefaultAsync(x => x.Title == productVM.Title) != null;
-            var existsDescription = await _db.Products.FirstOrDefaultAsync(x => x.Description == productVM.Description) != null;
-            var existsSKUCode = await _db.Products.FirstOrDefaultAsync(x => x.SKU == productVM.SKU) != null;
+            var existsTitle = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .FirstOrDefaultAsync(x => x.Title == productVM.Title) != null;
+            var existsDescription = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .FirstOrDefaultAsync(x => x.Description == productVM.Description) != null;
+            var existsSKUCode = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .FirstOrDefaultAsync(x => x.SKU == productVM.SKU) != null;
 
             if (productVM.CategoryId == "null")
             {
@@ -226,6 +233,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Update(int Id)
         {
             Product oldProduct = await _db.Products
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(pt => pt.Tag)
                 .Include(x => x.ProductImage)
@@ -265,15 +273,25 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Update(UpdateProductVM updateProductVM)
         {
             Product oldProduct = await _db.Products
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(pt => pt.Tag)
                 .Include(x => x.ProductImage)
                 .FirstOrDefaultAsync(x => x.Id == updateProductVM.Id);
             if (oldProduct == null) return RedirectToAction("NotFound", "AdminHome");
 
-            var existsTitle = await _db.Products.Where(product => product.Title == updateProductVM.Title && product.Id != updateProductVM.Id).FirstOrDefaultAsync() != null;
-            var existsDescription = await _db.Products.Where(product => product.Description == updateProductVM.Description && product.Id != updateProductVM.Id).FirstOrDefaultAsync() != null;
-            var existsSKUCode = await _db.Products.Where(product => product.SKU == updateProductVM.SKU && product.Id != updateProductVM.Id).FirstOrDefaultAsync() != null;
+            var existsTitle = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .Where(product => product.Title == updateProductVM.Title && product.Id != updateProductVM.Id)
+                .FirstOrDefaultAsync() != null;
+            var existsDescription = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .Where(product => product.Description == updateProductVM.Description && product.Id != updateProductVM.Id)
+                .FirstOrDefaultAsync() != null;
+            var existsSKUCode = await _db.Products
+                .Where(x => x.IsDeleted == false)
+                .Where(product => product.SKU == updateProductVM.SKU && product.Id != updateProductVM.Id)
+                .FirstOrDefaultAsync() != null;
 
 
             if (updateProductVM.CategoryId == "null")
@@ -453,29 +471,18 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             Product oldProduct = await _db.Products
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Tags)
                 .ThenInclude(x => x.Tag)
                 .Include(x => x.ProductImage)
                 .FirstOrDefaultAsync(x => x.Id == Id);
             if (oldProduct == null) return RedirectToAction("NotFound", "AdminHome");
 
-
-            foreach (var tag in oldProduct.Tags)
-            {
-                _db.Remove(tag);
-            }
-
-            _db.ProductImages.RemoveRange(oldProduct.ProductImage);
-            _db.Products.Remove(oldProduct);
-
-            foreach (var item in oldProduct.ProductImage)
-            {
-                item.ImgUrl.Delete(_env.WebRootPath, @"\Upload\ProductImages\");
-            }
-
+            oldProduct.IsDeleted = true;
+            
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Table");
+            return Ok();
         }
     }
 }

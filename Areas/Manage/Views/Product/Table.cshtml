@@ -47,13 +47,13 @@
                     </tfoot>
                     <tbody>
                         @{
-                            var count = 0;
+                            var count2 = 0;
                         }
                         @foreach (var item in Model.products)
                         {
-                            count++;
+                            count2++;
                             <tr>
-                                <td>@count</td>
+                                <td>@count2</td>
                                 <td>@item.Title</td>
                                 <td>@item.Description</td>
                                 <td>@item.Price</td>
@@ -61,7 +61,7 @@
                                 <td>@Model.categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>
                                 <td>
                                     @{
-                                        count = 0;
+                                        var count = 0;
                                     }
                                     @foreach (var tag in item.Tags)
                                     {
@@ -86,7 +86,7 @@
                                 </td>
                                 <td>
                                     <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
-                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger del-btn">Delete</a>
                                 </td>
                             </tr>
                         }

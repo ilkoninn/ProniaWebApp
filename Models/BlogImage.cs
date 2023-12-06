@@ -5,6 +5,7 @@ namespace ProniaWebApp.Models
     {
         public string ImgUrl { get; set; }
         public bool IsMain { get; set; }
+        public bool IsDeleted { get; set; }
         public int BlogId { get; set; }
         public Blog? Blog { get; set; }
     }
