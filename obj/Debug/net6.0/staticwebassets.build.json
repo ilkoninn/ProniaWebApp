@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vMQDC7xBaN/5rUT4B8+2A8AtcHD3BIF3TnRavnLMiiA=",
+  "Hash": "ZwmRhHnI/6KrmhZw/Fy0pWGzgYj0fNNh884t/2x/BOg=",
   "Source": "ProniaWebApp",
   "BasePath": "_content/ProniaWebApp",
   "Mode": "Default",
@@ -2888,6 +2888,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\service.png"
+    },
+    {
+      "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\js\\basket.js",
+      "SourceId": "ProniaWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\",
+      "BasePath": "_content/ProniaWebApp",
+      "RelativePath": "assets/js/basket.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\basket.js"
     },
     {
       "Identity": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\js\\main.js",

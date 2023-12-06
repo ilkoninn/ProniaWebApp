@@ -110,5 +110,27 @@ namespace ProniaWebApp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult DeleteItem(int Id)
+        {
+            var cookiesJson = Request.Cookies["Basket"];
+
+            List<BasketCookieItemVM> cookies;
+
+            if (cookiesJson != null)
+            {
+                cookies = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(cookiesJson);
+
+                var cookie = cookies.FirstOrDefault(c => c.Id == Id);
+                if (cookie != null)
+                {
+                    cookies.Remove(cookie);
+                }
+
+                Response.Cookies.Append("Basket", JsonConvert.SerializeObject(cookies));
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

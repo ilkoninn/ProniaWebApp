@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/assets/css/nice-select.css" />
     <link rel="stylesheet" href="~/assets/css/magnific-popup.min.css" />
     <link rel="stylesheet" href="~/assets/css/ion.rangeSlider.min.css" />
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css " rel="stylesheet">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css" />
@@ -1136,8 +1137,59 @@
     <script src="~/assets/js/plugins/ion.rangeSlider.min.js"></script>
     <script src="~/assets/js/plugins/mailchimp-ajax.js"></script>
     <script src="~/assets/js/plugins/jquery.counterup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
 
     <!--Main JS (Common Activation Codes)-->
+    <script>
+
+        let removeBtns = document.querySelectorAll(".rem-btn");
+        let getPriceElement = document.querySelector("#getTotalPrice");
+        let currentTotalPrice = parseInt(getPriceElement.innerHTML.split("$")[1]);
+
+        removeBtns.forEach(btn => btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            console.log("isledi")
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let btnLink = btn.getAttribute("href");
+                    let getPrice = document.querySelector("#getPrice");
+                    let diffPrice = parseInt(getPrice.innerHTML.split("$")[1])
+
+                    currentTotalPrice -= diffPrice
+                    getPriceElement.innerHTML = `$${currentTotalPrice}`;
+
+                    fetch(btnLink).then((result) => {
+                        if (result.status == 200) {
+                            btn.parentElement.parentElement.remove();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Something Went Wrong!",
+                                text: "Please Try Again Later!",
+                                icon: "error"
+                            });
+                        }
+                    })
+
+                }
+            });
+        }))
+
+    </script>
     <script src="~/assets/js/main.js"></script>
 </body>
 </html>

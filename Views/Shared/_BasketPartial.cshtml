@@ -24,7 +24,7 @@
                 TotalPrice += item.TotalPrice;
                 <tr>
                     <td class="product_remove">
-                        <a href="#">
+                        <a class="rem-btn" asp-controller="Cart" asp-action="DeleteItem" asp-route-id="@item.Id">
                             <i class="pe-7s-close"
                                data-tippy="Remove"
                                data-tippy-inertia="true"
@@ -44,7 +44,7 @@
                         <a href="#">@item.Title</a>
                     </td>
                     <td class="product-price">
-                        <span class="amount">$@item.Price</span>
+                        <span class="amount" id="getPrice">$@item.Price</span>
                     </td>
                     <td class="quantity">
                         <div class="cart-plus-minus">
@@ -60,7 +60,7 @@
                         </div>
                     </td>
                     <td class="product-subtotal">
-                        <span class="amount">$@item.TotalPrice</span>
+                        $<span class="amount">@item.TotalPrice</span>
                     </td>
                 </tr>
             }
@@ -96,7 +96,7 @@
         <div class="cart-page-total">
             <h2>Cart totals</h2>
             <ul>
-                <li>Total <span>$@TotalPrice</span></li>
+                <li>Total <span id="getTotalPrice">$@TotalPrice</span></li>
             </ul>
             <a href="#">Proceed to checkout</a>
         </div>

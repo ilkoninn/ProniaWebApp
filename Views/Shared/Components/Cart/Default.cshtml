@@ -26,7 +26,7 @@
                         TotalPrice += item.TotalPrice;
                     
                     <li class="minicart-product">
-                        <a class="product-item_remove" href="#">
+                        <a class="product-item_remove rem-btn" asp-controller="Cart" asp-action="DeleteItem" asp-route-id="@item.Id">
                             <i class="pe-7s-close"
                                data-tippy="Remove"
                                data-tippy-inertia="true"
