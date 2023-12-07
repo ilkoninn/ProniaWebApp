@@ -1,14 +1,18 @@
 ﻿
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace ProniaWebApp.DAL
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Slider> Sliders { get; set; }    
+        public DbSet<Settings> Settings { get; set; }
 
         //Blogs section
         public DbSet<Blog> Blogs { get; set; }

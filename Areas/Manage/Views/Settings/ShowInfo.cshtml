@@ -1,0 +1,43 @@
+﻿@model SettingsVM
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Details Page</h1>
+            <hr>
+            <!-- Displaying Details -->
+            <dl class="row">
+                <dt class="col-sm-3">Phone Number:</dt>
+                <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">Address:</dt>
+                <dd class="col-sm-9">@Model.Address</dd>
+
+                <dt class="col-sm-3">Logo Image:</dt>
+                <dd class="col-sm-9">
+                    <div style="width:100px">
+                        <img width="100%" src="~/Upload/ProductImages/@Model.LogoImgUrl">
+                    </div>
+                </dd>
+
+                <dt class="col-sm-3">Facebook:</dt>
+                <dd class="col-sm-9">@Model.FbUrl</dd>
+
+                <dt class="col-sm-3">Twitter:</dt>
+                <dd class="col-sm-9">@Model.XUrl</dd>
+
+                <dt class="col-sm-3">Pinterest:</dt>
+                <dd class="col-sm-9">@Model.PinUrl</dd>
+
+                <dt class="col-sm-3">Dribble:</dt>
+                <dd class="col-sm-9">@Model.DriUrl</dd>
+
+                <!-- Other fields and their values similarly -->
+            </dl>
+            <!-- Add more details as needed -->
+        </div>
+    </div>
+</div>

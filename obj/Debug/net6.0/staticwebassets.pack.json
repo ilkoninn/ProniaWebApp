@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\Upload\\BlogImages\\fd1f24a0-f268-4e2f-beef-aca0efbdad7f2-1-370x270.webp"
     },
     {
+      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\Logo\\dark.png",
+      "PackagePath": "staticwebassets\\Upload\\Logo\\dark.png"
+    },
+    {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\Upload\\ProductImages\\09a13451-7876-4555-b0ed-b1a12bb39d631-6-270x300.jpg",
       "PackagePath": "staticwebassets\\Upload\\ProductImages\\09a13451-7876-4555-b0ed-b1a12bb39d631-6-270x300.jpg"
     },
@@ -843,10 +847,6 @@
     {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\images\\website-images\\card.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\card.png"
-    },
-    {
-      "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\images\\website-images\\dark.png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\dark.png"
     },
     {
       "Id": "C:\\Users\\99470\\Desktop\\ProniaWebApp\\wwwroot\\assets\\images\\website-images\\example.jpg",

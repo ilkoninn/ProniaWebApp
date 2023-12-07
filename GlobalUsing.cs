@@ -9,4 +9,6 @@ global using Microsoft.CodeAnalysis;
 global using ProniaWebApp.Areas.Manage.ViewModels.EntityVM;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
+global using ProniaWebApp.Services;
+
 
