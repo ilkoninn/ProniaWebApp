@@ -3,7 +3,6 @@ namespace ProniaWebApp.Models
 {
     public class Settings : BaseAuditableEntity
     {
-        public int Id { get; set; }
         public string Key { get; set; }
         public string? Value { get; set; }
 

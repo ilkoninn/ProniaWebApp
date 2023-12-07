@@ -1,4 +1,5 @@
-﻿using NuGet.Protocol;
+﻿using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
@@ -6,35 +7,39 @@ namespace ProniaWebApp.Areas.Manage.Controllers
     public class SettingsController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly IWebHostEnvironment _env;
 
-        public SettingsController(AppDbContext db)
+        public SettingsController(AppDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _env = webHostEnvironment;
         }
 
         public async Task<IActionResult> ShowInfo()
         {
-            if(await _db.Settings.ToListAsync() != null) 
+            var settings = await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
+
+            if(settings != null)
             {
-                return View();
+                return View(settings);
             }
             else
             {
-                return RedirectToAction("UpdateInfo", "Settings");
+                return RedirectToAction("UpdateInfo");
             }
+
         }
 
-        public async Task<IActionResult> UpdateInfo(Dictionary<string, string> settings, IFormFile logo)
+        public async Task<IActionResult> UpdateInfo(SettingsVM settings)
         {
-            foreach (var item in settings)
+            foreach (var item in await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value))
             {
-                var setting = await _db.Settings.FirstOrDefaultAsync(s => s.Key == item.Key);
-                setting.Value = setting.Value;
+                
             }
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowInfo");
         }
 
     }
