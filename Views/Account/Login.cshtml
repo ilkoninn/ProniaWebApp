@@ -1,0 +1,64 @@
+﻿@model LoginVM
+
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height"
+         data-bg-image="assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+        <div class="container h-100">
+            <div class="breadcrumb-item">
+                <h2 class="breadcrumb-heading">Login & Register Page</h2>
+                <ul>
+                    <li>
+                        <a asp-action="Index" asp-controller="Home">Home</a>
+                    </li>
+                    <li>Login</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="login-register-area section-space-y-axis-100 mb-5">
+        <div class="container">
+            <form method="post">
+                <div class="login-form">
+                    <h4 class="login-title">Login</h4>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <label asp-for="UsernameOrEmail">Username/Email</label>
+                            <input asp-for="UsernameOrEmail" class="form-control" placeholder="Username or Email">
+                            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                                <span asp-validation-for="UsernameOrEmail"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label asp-for="Password">Password</label>
+                            <input asp-for="Password" class="form-control" placeholder="Password">
+                            <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="check-box">
+                                <input asp-for="RememberMe" type="checkbox" id="remember_me">
+                                <label asp-for="RememberMe">Remember me</label>
+                                <div style="color: red; margin-top: 10px; margin-left: 10px;">
+                                    <span asp-validation-for="Password"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pt-1 mt-md-0">
+                            <div class="forgotton-password_info">
+                                <a asp-action="Register" asp-controller="Account">You do not have account?</a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->

@@ -10,5 +10,7 @@ global using ProniaWebApp.Areas.Manage.ViewModels.EntityVM;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
 global using ProniaWebApp.Services;
-
+global using ProniaWebApp.Enums;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Authorization;
 

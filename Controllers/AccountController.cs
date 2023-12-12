@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace ProniaWebApp.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
+        // <-- Register Section -->
         [HttpGet]
         public async Task<IActionResult> Register()
         {
@@ -36,26 +37,124 @@ namespace ProniaWebApp.Controllers
                 UserName = registerVM.Username,
             };
 
-            var result = await _userManager.CreateAsync(appUser, registerVM.Password);
+            var resultEmail = await _userManager.FindByEmailAsync(registerVM.Email);
 
-            if (!result.Succeeded)
+            if (resultEmail == null)
             {
-                foreach (var item in result.Errors)
+                var result = await _userManager.CreateAsync(appUser, registerVM.Password);
+                await _userManager.AddToRoleAsync(appUser, "Member");
+
+                if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", item.Description);
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                    return View(registerVM);
                 }
-                return View(registerVM);
+
+                return RedirectToAction(nameof(Login));
+            }
+            else
+            {
+                ModelState.AddModelError("Email", "This email used before, please try another email!");
+                return View();
+            }
+        }
+
+        // <-- Login Section -->
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM loginVM, string? returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            AppUser user = await _userManager.FindByNameAsync(loginVM.UsernameOrEmail);
+
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(loginVM.UsernameOrEmail);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Username/Email or password is not valid!");
+                    return View();
+                }
+
             }
 
-            await _signInManager.SignInAsync(appUser, false);
+            if (user != null)
+            {
+                var result = _signInManager.CheckPasswordSignInAsync(user, loginVM.Password, true).Result;
+
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", "Username/Email or password is not valid!");
+                }
+                if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Please, try again later!");
+                }
+
+                await _signInManager.SignInAsync(user, loginVM.RememberMe);
+                if (returnUrl != null)
+                {
+                    return RedirectToAction(returnUrl);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Username/Email or password is not valid!");
+                return View();
+            }
+        }
+
+        // <-- Logout Section -->
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
+        }
+
+        // <-- Create Role Section -->
+        public async Task<IActionResult> CreateRole()
+        {
+            //string[] userRoles = { "Admin", "Member", "Moderator"};
+
+            //foreach (var userRole in userRoles)
+            //{
+            //    var roleExist = await _roleManager.RoleExistsAsync(userRole);
+            //    if (!roleExist)
+            //    {
+            //        await _roleManager.CreateAsync(new IdentityRole()
+            //        {
+            //            Name = userRole
+            //        });
+            //    }
+            //}
+
+            foreach (var item in Enum.GetValues(typeof(UserRole)))
+            {
+                var roleExist = await _roleManager.RoleExistsAsync(item.ToString());
+                if (!roleExist)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole()
+                    {
+                        Name = item.ToString()
+                    });
+                }
+            }
 
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Register", "Account");
-        }
     }
 }

@@ -13,6 +13,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         }
 
         // <--- Table Section --->
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Table()
         {
             AdminVM adminVM = new AdminVM();
@@ -24,6 +25,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
         // <--- Create Section --->
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             return View();
@@ -92,6 +94,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
 
         // <--- Update Section --->
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int Id)
         {
             Slider oldSlider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == Id);
@@ -172,6 +175,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
         }
 
         // <--- Delete Section --->
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int Id)
         {
             Slider oldSlider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == Id);

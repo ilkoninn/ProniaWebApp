@@ -14,7 +14,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             _db = db;
             _env = webHostEnvironment;
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> ShowInfo()
         {
             var settings = await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
@@ -29,7 +29,7 @@ namespace ProniaWebApp.Areas.Manage.Controllers
             }
 
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateInfo(SettingsVM settings)
         {
             foreach (var item in await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value))

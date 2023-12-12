@@ -1,8 +1,10 @@
 ﻿
 
+
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class AdminHomeController : Controller
     {
         AppDbContext _db;
