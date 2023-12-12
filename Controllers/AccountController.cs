@@ -106,7 +106,7 @@ namespace ProniaWebApp.Controllers
                 await _signInManager.SignInAsync(user, loginVM.RememberMe);
                 if (returnUrl != null)
                 {
-                    return RedirectToAction(returnUrl);
+                    return Redirect(returnUrl);
                 }
                 return RedirectToAction("Index", "Home");
             }
