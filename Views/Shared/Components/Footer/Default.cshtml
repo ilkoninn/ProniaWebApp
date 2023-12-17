@@ -10,19 +10,16 @@
                     <div class="footer-widget-item">
                         <div class="footer-widget-logo">
                             <a asp-controller="Home" asp-action="Index">
-                                <img src="~/Upload/Logo/dark.png" alt="Logo" />
+                                <img src="~/Upload/Logo/@Model["Logo"]" alt="Logo" />
                             </a>
                         </div>
                         <p class="footer-widget-desc">
-                            Lorem ipsum dolor sit amet, consec adipisl elit, sed do
-                            eiusmod tempor
-                            <br />
-                            incidio ut labore et dolore magna.
+                           @Model["Description"]
                         </p>
                         <div class="social-link with-border">
                             <ul>
                                 <li>
-                                    <a href="https://www.facebook.com/?locale=az_AZ"
+                                    <a href="@Model["Facebook"]"
                                        data-tippy="Facebook"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
@@ -33,7 +30,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/"
+                                    <a href="@Model["Twitter/X"]"
                                        data-tippy="Twitter"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
@@ -44,7 +41,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.pinterest.com/"
+                                    <a href="@Model["Pinterest"]"
                                        data-tippy="Pinterest"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
@@ -55,8 +52,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://dribbble.com/"
-                                       data-tippy="Dribbble"
+                                    <a href="@Model["Dribble"]"
+                                       data-tippy="Dribble"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
                                        data-tippy-delay="50"
@@ -138,10 +135,10 @@
                 <div class="col-lg-3 pt-40">
                     <div class="footer-contact-info">
                         <h3 class="footer-widget-title">Got Question? Call Us</h3>
-                        <a class="number" href="tel://+994 70 660 00 17">+994 70 660 00 17</a>@*@Model["PhoneNumber"]*@
+                        <a class="number" href="tel://@Model["Phone"]">@Model["Phone"]</a>
                         <div class="address">
                             <ul>
-                                <li>Baku c. / Yeni Suraxani r. / Yeni Gunesli t.</li>@*@Model["Address"]*@
+                                <li>@Model["Address"]</li>
                             </ul>
                         </div>
                     </div>

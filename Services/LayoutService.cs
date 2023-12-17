@@ -4,15 +4,17 @@
     {
         private readonly AppDbContext _db;
 
-        public LayoutService(AppDbContext context)
+        public LayoutService(AppDbContext db)
         {
-            _db = context;
+            _db = db;
         }
 
-        public async Task<Dictionary<string, string>> GetSetting()
+        public async Task<Dictionary<string, string>> GetSettingsAsync()
         {
-            Dictionary<string, string> setting = _db.Settings.ToDictionary(s => s.Key, s => s.Value);
-            return setting;
+            Dictionary<string, string> settings = await _db.Settings
+                .ToDictionaryAsync(k => k.Key, v => v.Value);
+
+            return settings;
         }
     }
 }

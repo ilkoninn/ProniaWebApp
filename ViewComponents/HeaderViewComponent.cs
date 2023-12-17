@@ -11,8 +11,8 @@
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var setting = await _db.Settings.ToDictionaryAsync(x => x.Key, x => x.Value);
-            return View(setting);
+            var settings = await _db.Settings.ToDictionaryAsync(x => x.Key, x => x.Value);
+            return View(settings);
         }
     }
 }

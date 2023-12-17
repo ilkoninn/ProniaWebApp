@@ -57,11 +57,11 @@
                     <div class="header-middle-wrap position-relative">
                         <div class="header-contact d-none d-lg-flex">
                             <i class="pe-7s-call"></i>
-                            <a href="tel://+994 70 660 00 17">+994 70 660 00 17</a> @*@Model["PhoneNumber"]*@
+                            <a href="tel://@Model["Phone"]">@Model["Phone"]</a>
                         </div>
 
                         <a asp-controller="Home" asp-action="Index" class="header-logo">
-                            <img src="~/Upload/Logo/dark.png" alt="Header Logo" /> @*@Model["LogoImgUrl"]*@
+                            <img src="~/Upload/Logo/@Model["Logo"]" alt="Header Logo" /> 
                         </a>
 
                         <div class="header-right">
@@ -264,7 +264,7 @@
                 </div>
                 <div class="header-contact offcanvas-contact">
                     <i class="pe-7s-call"></i>
-                    <a href="tel://+994 70 660 00 17">+994 70 660 00 17</a>@*Model["PhoneNumber"]*@
+                    <a href="tel://@Model["Phone"]">@Model["Phone"]</a>
                 </div>
                 <div class="offcanvas-user-info">
                     <ul class="dropdown-wrap">

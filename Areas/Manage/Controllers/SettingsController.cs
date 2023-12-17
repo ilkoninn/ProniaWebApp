@@ -1,45 +1,101 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ProniaWebApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin")]
+
     public class SettingsController : Controller
     {
         private readonly AppDbContext _db;
         private readonly IWebHostEnvironment _env;
 
-        public SettingsController(AppDbContext db, IWebHostEnvironment webHostEnvironment)
+        public SettingsController(AppDbContext db, IWebHostEnvironment env)
         {
             _db = db;
-            _env = webHostEnvironment;
+            _env = env;
         }
-        [Authorize(Roles = "Admin, Moderator")]
-        public async Task<IActionResult> ShowInfo()
+
+        public async Task<IActionResult> Detail()
         {
-            var settings = await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
-
-            if(settings != null)
-            {
-                return View(settings);
-            }
-            else
-            {
-                return RedirectToAction("UpdateInfo");
-            }
-
+            return View();
         }
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateInfo(SettingsVM settings)
+
+        [HttpGet]
+        public async Task<IActionResult> Update()
         {
-            foreach (var item in await _db.Settings.ToDictionaryAsync(s => s.Key, s => s.Value))
+            Dictionary<string, string> settings = await _db.Settings
+                .ToDictionaryAsync(k => k.Key, v => v.Value);
+            if (settings == null) return RedirectToAction(nameof(Update));
+
+
+            return View(settings);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Dictionary<string, string> settings, IFormFile? Logo)
+        {
+            foreach (var item in settings)
             {
-                
+                var settingItem = await _db.Settings
+                    .FirstOrDefaultAsync(k => k.Key == item.Key);
+
+                if (item.Key != "Logo")
+                {
+                    if (settingItem == null)
+                    {
+                        var newSettingItem = new Settings()
+                        {
+                            Key = item.Key,
+                            Value = item.Value,
+                            CreatedDate = DateTime.Now,
+                            UpdatedDate = DateTime.Now,
+                        };
+
+                        await _db.Settings.AddAsync(newSettingItem);
+                    }
+                    else
+                    {
+                        settingItem.Value = item.Value;
+                        settingItem.CreatedDate = settingItem.CreatedDate;
+                        settingItem.UpdatedDate = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    if (Logo != null)
+                    {
+                        if (!Logo.CheckType("image/"))
+                        {
+                            ModelState.AddModelError("Logo", "Logo type is not image");
+                        }
+                        if (!Logo.CheckLength(2097152))
+                        {
+                            ModelState.AddModelError("Logo", "Logo image size must be 2MB");
+                        }
+
+                        if (!ModelState.IsValid)
+                        {
+                            settings["Logo"] = settingItem.Value;
+                            return View(settings);
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    FileManager.Delete(settingItem.Value, _env.WebRootPath, @"\Upload\Logo\");
+                    settingItem.Value = Logo.Upload(_env.WebRootPath, @"\Upload\Logo\");
+
+                }
+
             }
+
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("ShowInfo");
+            return RedirectToAction(nameof(Detail));
         }
 
     }
